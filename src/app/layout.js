@@ -22,8 +22,8 @@ const afc = Afacad({
 });
 
 export const metadata = {
-  title: "DropFast",
-  description: "Most modern and fast way to test dropshipping products",
+  title: "Competiboard",
+  description: "Leaderboard creation app",
 };
 
 export default function RootLayout({ children }) {
@@ -33,7 +33,7 @@ export default function RootLayout({ children }) {
     >
       <html lang="en">
         <head>
-          <link rel="icon" type="image/png" href="DropFastLogo.png" />
+          <link rel="icon" type="image/png" href="CompetiboardLogo.png" />
         </head>
         <body
           className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable}`}

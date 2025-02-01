@@ -15,6 +15,7 @@ const isPublicRoute = createRouteMatcher([
   "/sign-up(.*)",
   "/",
   "/api(.*)",
+  "/live(.*)",
   "/sitemap.txt",
   "/terms",
   "/privacy",
@@ -22,28 +23,18 @@ const isPublicRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, request) => {
   const { nextUrl, headers } = request;
-  const host = headers.get("host"); // Get the domain name from the request headers
 
-  // If the request is for any /live/* path, allow it to proceed
-  if (nextUrl.pathname.startsWith("/live/")) {
+  // Allow requests to /live/* and /api/*
+  if (
+    nextUrl.pathname.startsWith("/live/") ||
+    nextUrl.pathname.startsWith("/api/")
+  ) {
     return NextResponse.next();
   }
 
-  if (nextUrl.pathname.startsWith("/api/")) {
-    return NextResponse.next(); // Allow the webhook to proceed
-  }
-
-  // Apply Clerk authentication protection for non-public routes on any domain
+  // Redirect to sign-in if the route is protected and user is not authenticated
   if (!isPublicRoute(request)) {
     auth().protect();
-    return NextResponse.next(); // Allow the protected route to proceed
-  }
-
-  // If the request is for any path other than /live/*, ensure it's from your main domain
-  if (host === "localhost:3000") {
-    return NextResponse.next(); // Allow access for your main domain
-  } else {
-    // Redirect to your main domain if the request is not for /live/*
-    return NextResponse.redirect(new URL("http://localhost:3000", request.url));
+    return NextResponse.next();
   }
 });
