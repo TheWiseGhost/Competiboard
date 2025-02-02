@@ -27,7 +27,7 @@ module.exports = {
         afc: ["var(--font-afc)"],
       },
       colors: {
-        vanilla: "#FCF6B1",
+        vanilla: "#F6C368",
         light_vanilla: "#FBF2C0",
         coral: "#F96F5D",
         light_coral: "#FF6C63",

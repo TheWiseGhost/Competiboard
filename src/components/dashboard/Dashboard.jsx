@@ -3,6 +3,16 @@
 import React, { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
 import Loading from "../global/Loading";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../global/Drawer";
 
 const GridItem = ({ title, thumbnail }) => (
   <div className="flex flex-col space-y-2 px-4">
@@ -72,10 +82,36 @@ const DashboardComponent = () => {
           ))}
         </div>
       ) : (
-        <div className="w-full h-full flex justify-center items-center text-center">
+        <div className="w-full h-full flex flex-col justify-center items-center text-center space-y-4">
           <p className="font-dm text-rubarb">
             Create Your First Board to get started with Competiboard
           </p>
+          <Drawer>
+            <DrawerTrigger>
+              <span className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
+                Create Board
+              </span>
+            </DrawerTrigger>
+            <DrawerContent>
+              <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
+                <div className="mx-auto h-2 rounded-2xl bg-light_vanilla w-1/5"></div>
+                <DrawerHeader>
+                  <DrawerTitle className="font-dm text-4xl text-coral pt-6">
+                    Create a New Board
+                  </DrawerTitle>
+                  <DrawerDescription className="font-dm text-sm text-vanilla">
+                    Set up your new Competiboard here.
+                  </DrawerDescription>
+                </DrawerHeader>
+                <div className="p-4">{/* Add your form or content here */}</div>
+                <DrawerFooter>
+                  <button className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
+                    Create
+                  </button>
+                </DrawerFooter>
+              </div>
+            </DrawerContent>
+          </Drawer>
         </div>
       )}
     </>

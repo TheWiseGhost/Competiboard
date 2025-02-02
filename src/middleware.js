@@ -22,7 +22,7 @@ const isPublicRoute = createRouteMatcher([
 ]);
 
 export default clerkMiddleware(async (auth, request) => {
-  const { nextUrl, headers } = request;
+  const { nextUrl } = request;
 
   // Allow requests to /live/* and /api/*
   if (
@@ -34,7 +34,7 @@ export default clerkMiddleware(async (auth, request) => {
 
   // Redirect to sign-in if the route is protected and user is not authenticated
   if (!isPublicRoute(request)) {
-    await auth.protect();
+    await auth().protect();
     return NextResponse.next();
   }
 });
