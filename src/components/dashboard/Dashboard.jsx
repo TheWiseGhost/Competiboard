@@ -17,18 +17,40 @@ import { FileUpload } from "@/components/global/FileUpload";
 import { ToastAction } from "../global/Toast";
 import { useToast } from "../global/Use-Toast";
 
+const CircleText = ({ text }) => (
+  <div className="flex flex-row items-center">
+    <div className="bg-light_vanilla p-2 rounded-full mr-2"></div>
+    <div className="text-vanilla text-sm">{text}</div>
+  </div>
+);
+
+const Header = ({ title, subtitle }) => (
+  <div className="flex flex-col space-y-3 font-dm">
+    <div className="flex items-center gap-2">
+      <CircleText text="Competiboard" />
+      <span>/</span>
+      <span className="text-bark text-sm">{subtitle}</span>
+    </div>
+    <div>
+      <h1 className="text-4xl font-medium text-bark">{title}</h1>
+    </div>
+  </div>
+);
+
 const GridItem = ({ title, thumbnail }) => (
-  <div className="flex flex-col space-y-2 px-4">
-    <div className="bg-gray-100 rounded-lg overflow-hidden flex justify-center items-center h-52 w-full">
+  <div className="flex flex-col space-y-2 px-4 items-start">
+    <div className="rounded-lg overflow-hidden flex flex-col justify-center items-center h-64 w-fit">
       {thumbnail ? (
         <img
           src={thumbnail}
-          className="w-full self-center rounded-2xl"
+          className="w-full h-3/4 object-contain px-4"
           alt="thumbnail"
         />
       ) : null}
+      <div className="text-xl font-dm font-medium text-bark w-full text-center pr-2 pt-2">
+        {title}
+      </div>
     </div>
-    <div className="text-xl text-center pr-2">{title}</div>
   </div>
 );
 
@@ -132,7 +154,7 @@ const DashboardComponent = () => {
   return (
     <>
       {boards.length > 0 ? (
-        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 ">
+        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 items-start">
           {boards.map((board) => (
             <GridItem
               key={board.id}
@@ -198,7 +220,8 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <div className="bg-[#FFFFFF] rounded-tl-[18px] w-full h-full">
+  <div className="bg-[#FFFFFF] rounded-tl-[40px] w-full h-full pl-10 pt-8 mt-0.5">
+    <Header title={"Your Competiboards"} subtitle={"Dashboard"} />
     <DashboardComponent />
   </div>
 );
