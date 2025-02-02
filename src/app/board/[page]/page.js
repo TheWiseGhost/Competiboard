@@ -6,7 +6,7 @@ import {
   Sidebar,
   SidebarBody,
   SidebarLink,
-} from "../../components/global/Sidebar";
+} from "../../../components/global/Sidebar";
 import {
   IconArrowLeft,
   IconBrandTabler,

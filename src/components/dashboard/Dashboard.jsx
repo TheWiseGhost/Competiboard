@@ -13,6 +13,9 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../global/Drawer";
+import { FileUpload } from "@/components/global/FileUpload";
+import { ToastAction } from "../global/Toast";
+import { useToast } from "../global/Use-Toast";
 
 const GridItem = ({ title, thumbnail }) => (
   <div className="flex flex-col space-y-2 px-4">
@@ -32,6 +35,63 @@ const GridItem = ({ title, thumbnail }) => (
 const DashboardComponent = () => {
   const [boards, setBoards] = useState(null); // Initialize as null to check loading state
   const { user } = useUser();
+
+  const [file, setFile] = useState(null);
+  const [title, setTitle] = useState("");
+  const { toast } = useToast();
+
+  const handleFileUpload = (file) => {
+    setFile(file);
+  };
+
+  const handleTitleChange = (event) => {
+    setTitle(event.target.value.slice(0, 100));
+  };
+
+  const handleUpload = async () => {
+    if (!file || !title) {
+      alert("Please fill all fields and select a file.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("title", title);
+      formData.append("clerk_id", user.id);
+
+      const uploadUrl = "http://127.0.0.1:8000/api/add_board/";
+
+      const response = await fetch(uploadUrl, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Error uploading file.");
+      }
+    } catch (error) {
+      // console.error("Error uploading file:", error);
+      // alert("Error uploading file. Please try again.");
+    } finally {
+      toast({
+        title: `Board Added: ${title}`,
+        description: "Start building your board when your ready",
+        action: (
+          <ToastAction
+            onClick={() => {
+              window.location.href = "/board/data";
+            }}
+            altText="Go to Edit Data"
+          >
+            Edit Data
+          </ToastAction>
+        ),
+      });
+      setFile(null);
+      setTitle("");
+    }
+  };
 
   useEffect(() => {
     if (user) {
@@ -99,15 +159,34 @@ const DashboardComponent = () => {
                   <DrawerTitle className="font-dm text-4xl text-coral pt-6">
                     Create a New Board
                   </DrawerTitle>
-                  <DrawerDescription className="font-dm text-sm text-vanilla">
-                    Set up your new Competiboard here.
-                  </DrawerDescription>
                 </DrawerHeader>
-                <div className="p-4">{/* Add your form or content here */}</div>
+                <div className="p-4">
+                  <div className="pb-2 font-dm">
+                    <input
+                      type="text"
+                      value={title}
+                      onChange={handleTitleChange}
+                      placeholder="Enter title"
+                      className="border w-full border-vanilla rounded-lg p-3 text-gray-700 active:border-coral"
+                      maxLength="100"
+                    ></input>
+                  </div>
+                  <div className="pb-4">
+                    <FileUpload
+                      onChange={handleFileUpload}
+                      target={"Board Thumbnail"}
+                    />
+                  </div>
+                </div>
                 <DrawerFooter>
-                  <button className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
-                    Create
-                  </button>
+                  <DrawerClose>
+                    <button
+                      onClick={handleUpload}
+                      className="bg-coral font-dm w-4/5 mx-auto text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none"
+                    >
+                      Create
+                    </button>
+                  </DrawerClose>
                 </DrawerFooter>
               </div>
             </DrawerContent>

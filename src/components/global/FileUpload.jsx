@@ -54,7 +54,7 @@ export const FileUpload = ({ onChange, target }) => {
         layoutId={target}
         onClick={handleClick}
         whileHover="animate"
-        className="p-5 border-dashed group/file block rounded-lg cursor-pointer w-full relative overflow-hidden"
+        className="p-5 border-dashed group/file block rounded-lg cursor-pointer w-full relative overflow-hidden font-dm"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -65,15 +65,12 @@ export const FileUpload = ({ onChange, target }) => {
           onChange={(e) => handleFileChange(e.target.files[0])}
           className="hidden"
         />
+        <p className="relative text-center pb-3 z-20 text-lg font-dm font-medium text-rubarb dark:text-neutral-300">
+          Upload {target}
+        </p>
         <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div>
         <div className="flex flex-col items-center justify-center">
-          <p className="relative z-20 text-lg font-dm font-semibold text-neutral-700 dark:text-neutral-300">
-            Upload {target}
-          </p>
-          <p className="relative z-20 font-sans font-normal text-neutral-400 dark:text-neutral-400 text-base mt-2">
-            Drag or drop your files here or click to upload
-          </p>
-          <div className="relative w-full mt-10 max-w-xl mx-auto">
+          <div className="relative w-full max-w-xl mx-auto">
             {file.length > 0 &&
               file.map((file, idx) => (
                 <motion.div
@@ -84,7 +81,7 @@ export const FileUpload = ({ onChange, target }) => {
                       : "file-upload-" + idx + target
                   }
                   className={cn(
-                    "relative overflow-hidden z-40 bg-white dark:bg-neutral-900 flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
+                    "relative overflow-hidden z-40 bg-white flex flex-col items-start justify-start md:h-24 p-4 mt-4 w-full mx-auto rounded-md",
                     "shadow-lg"
                   )}
                 >
@@ -137,10 +134,10 @@ export const FileUpload = ({ onChange, target }) => {
                   stiffness: 300,
                   damping: 20,
                 }}
-                initial={{ borderColor: "gray" }}
-                animate={{ borderColor: isHovered ? "black" : "gray" }}
+                initial={{ borderColor: "#C06E52" }}
+                animate={{ borderColor: isHovered ? "#43281C" : "#C06E52" }}
                 className={cn(
-                  "relative group-hover/file:shadow-2xl z-40 border border-dashed border-gray-400 dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
+                  "relative group-hover/file:shadow-2xl z-40 border border-dashed dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
                   "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
                 )}
               >
@@ -162,7 +159,7 @@ export const FileUpload = ({ onChange, target }) => {
             {!file.length && (
               <motion.div
                 variants={secondaryVariant}
-                className="absolute opacity-0 border border-dashed border-sky-500 inset-0 z-30 bg-transparent flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md"
+                className="absolute opacity-0 border border-dashed border-coral inset-0 z-30 bg-transparent flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md"
               ></motion.div>
             )}
           </div>
