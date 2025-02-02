@@ -38,12 +38,7 @@ export default function RootLayout({ children }) {
         <body
           className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable}`}
         >
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
+          <ThemeProvider enableSystem disableTransitionOnChange>
             <main>{children}</main>
           </ThemeProvider>
           <Toaster />

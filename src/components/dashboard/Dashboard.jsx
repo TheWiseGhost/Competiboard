@@ -50,7 +50,7 @@ const DashboardComponent = () => {
 
   if (boards === null) {
     return (
-      <div className="w-full flex justify-center items-center">
+      <div className="w-full h-full flex justify-center items-center bg-white">
         <Loading />
       </div>
     );
@@ -59,7 +59,7 @@ const DashboardComponent = () => {
   return (
     <>
       {boards.length > 0 ? (
-        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6">
+        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 ">
           {boards.map((board) => (
             <GridItem
               key={board.id}
@@ -80,9 +80,9 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <>
+  <div className="bg-white w-full h-full">
     <DashboardComponent />
-  </>
+  </div>
 );
 
 export default Dashboard;

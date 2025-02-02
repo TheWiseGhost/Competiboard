@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files
+    // Skip Next.js internals and all static files, unless found in search params
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
     // Always run for API routes
     "/(api|trpc)(.*)",
@@ -21,7 +21,7 @@ const isPublicRoute = createRouteMatcher([
   "/privacy",
 ]);
 
-export default clerkMiddleware((auth, request) => {
+export default clerkMiddleware(async (auth, request) => {
   const { nextUrl, headers } = request;
 
   // Allow requests to /live/* and /api/*
@@ -34,7 +34,7 @@ export default clerkMiddleware((auth, request) => {
 
   // Redirect to sign-in if the route is protected and user is not authenticated
   if (!isPublicRoute(request)) {
-    auth().protect();
+    await auth.protect();
     return NextResponse.next();
   }
 });
