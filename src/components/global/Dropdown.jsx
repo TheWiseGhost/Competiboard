@@ -16,10 +16,13 @@ const Dropdown = ({ page }) => {
       const fetchBoards = async () => {
         setLoading(true); // Start loading
         try {
-          const response = await fetch("http://127.0.0.1/api/board_options/", {
-            method: "POST",
-            body: JSON.stringify({ clerk_id: user.id }),
-          });
+          const response = await fetch(
+            "http://127.0.0.1:8000/api/board_options/",
+            {
+              method: "POST",
+              body: JSON.stringify({ clerk_id: user.id }),
+            }
+          );
 
           if (response.ok) {
             const data = await response.json();

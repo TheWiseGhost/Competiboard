@@ -7,7 +7,6 @@ import {
   SidebarLink,
 } from "../../components/global/Sidebar";
 import {
-  IconArrowLeft,
   IconBrandTabler,
   IconHammer,
   IconSettings,
@@ -26,42 +25,35 @@ export default function SidebarDemo({ params }) {
       label: "Dashboard",
       href: "/dashboard",
       icon: (
-        <IconBrandTabler className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconBrandTabler className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Add Source",
       href: "/add_source",
       icon: (
-        <IconCirclePlus className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconCirclePlus className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Edit Display",
       href: "/board/builder",
       icon: (
-        <IconHammer className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconHammer className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Edit Data",
       href: "/board/data",
       icon: (
-        <IconReportAnalytics className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconReportAnalytics className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
       label: "Settings",
       href: "/settings",
       icon: (
-        <IconSettings className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
-    },
-    {
-      label: "Logout",
-      href: "#",
-      icon: (
-        <IconArrowLeft className="text-neutral-700 dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconSettings className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
   ];
@@ -70,7 +62,7 @@ export default function SidebarDemo({ params }) {
     <>
       <div
         className={cn(
-          "rounded-md hidden md:flex flex-col md:flex-row bg-gray-100 dark:bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 overflow-hidden",
+          "rounded-md hidden md:flex flex-col md:flex-row bg-light_vanilla dark:bg-neutral-800 w-full flex-1 border border-neutral-200 overflow-hidden",
           "h-screen"
         )}
       >
@@ -107,10 +99,9 @@ export const Logo = () => {
   return (
     <Link
       href="#"
-      className="font-normal font-dm flex space-x-2 items-center text-sm text-black py-1 relative z-20"
+      className="font-normal font-dm flex space-x-2 items-center text-sm py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
-      {/* <img src="DropFastLogo.png" className="w-6 flex-shrink-0" /> */}
+      <div className="h-5 w-6 bg-light_coral dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -127,7 +118,7 @@ export const LogoIcon = () => {
       href="#"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-xl rounded-tr-md rounded-tl-xl rounded-bl-md flex-shrink-0"></div>
+      <div className="h-5 w-6 bg-light_coral dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
     </Link>
   );
 };

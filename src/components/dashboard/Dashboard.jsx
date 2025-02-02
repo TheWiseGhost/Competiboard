@@ -27,11 +27,14 @@ const DashboardComponent = () => {
     if (user) {
       const fetchBoards = async () => {
         try {
-          const response = await fetch("http://127.0.0.1/api/board_options/", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" }, // Added header for JSON content
-            body: JSON.stringify({ clerk_id: user.id }),
-          });
+          const response = await fetch(
+            "http://127.0.0.1:8000/api/board_options/",
+            {
+              method: "POST",
+              headers: { "Content-Type": "application/json" }, // Added header for JSON content
+              body: JSON.stringify({ clerk_id: user.id }),
+            }
+          );
 
           if (response.ok) {
             const data = await response.json();
@@ -69,8 +72,8 @@ const DashboardComponent = () => {
           ))}
         </div>
       ) : (
-        <div className="w-full justify-center items-center text-center">
-          <p className="font-dm pt-40">
+        <div className="w-full h-full flex justify-center items-center text-center">
+          <p className="font-dm">
             Create Your First Board Instance to get started with Competiboard
           </p>
         </div>
@@ -80,7 +83,7 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <div className="bg-white w-full h-full">
+  <div className="bg-white rounded-tl-[60px] w-full h-full">
     <DashboardComponent />
   </div>
 );
