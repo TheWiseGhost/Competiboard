@@ -28,9 +28,11 @@ module.exports = {
       },
       colors: {
         vanilla: "#FCF6B1",
-        light_vanilla: "#FFFEF1",
-        coral: "#E12A1E",
+        light_vanilla: "#FBF2C0",
+        coral: "#F96F5D",
         light_coral: "#FF6C63",
+        rubarb: "#C06E52",
+        bark: "#43281C",
       },
       keyframes: {
         "accordion-down": {

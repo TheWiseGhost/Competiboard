@@ -73,8 +73,8 @@ const DashboardComponent = () => {
         </div>
       ) : (
         <div className="w-full h-full flex justify-center items-center text-center">
-          <p className="font-dm">
-            Create Your First Board Instance to get started with Competiboard
+          <p className="font-dm text-rubarb">
+            Create Your First Board to get started with Competiboard
           </p>
         </div>
       )}
@@ -83,7 +83,7 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <div className="bg-white rounded-tl-[60px] w-full h-full">
+  <div className="bg-[#FFFFFF] rounded-tl-[18px] w-full h-full">
     <DashboardComponent />
   </div>
 );
