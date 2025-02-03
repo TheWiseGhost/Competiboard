@@ -1,6 +1,5 @@
 "use client";
 
-import Dropdown from "@/components/global/Dropdown";
 import React, { useState } from "react";
 import {
   Sidebar,
@@ -8,7 +7,6 @@ import {
   SidebarLink,
 } from "../../../components/global/Sidebar";
 import {
-  IconArrowLeft,
   IconBrandTabler,
   IconHammer,
   IconSettings,
@@ -19,27 +17,14 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import EditData from "@/components/data/EditData";
 
-const DropdownComponent = ({ params }) => {
+export default function SidebarDemo({ params }) {
   const unwrappedParams = React.use(params);
 
   // Access the page property from the unwrapped params
-  const page = unwrappedParams.page;
+  const id = unwrappedParams.id;
 
-  // Capitalize the first letter of the page
-  const capitalizedPage = page.charAt(0).toUpperCase() + page.slice(1);
-
-  return (
-    <div className="font-dm pt-8 pb-6 rounded-tl-[40px] mt-1 mr-1 px-10 flex flex-col h-screen w-full bg-white justify-center items-center">
-      <div className="flex flex-col space-y-2">
-        <h1 className="text-5xl font-medium text-center">{capitalizedPage}</h1>
-        <Dropdown page={page} />
-      </div>
-    </div>
-  );
-};
-
-export default function SidebarDemo({ params }) {
   const links = [
     {
       label: "Dashboard",
@@ -79,29 +64,40 @@ export default function SidebarDemo({ params }) {
   ];
   const [open, setOpen] = useState(false);
   return (
-    <div
-      className={cn(
-        "rounded-md flex flex-col md:flex-row bg-light_vanilla dark:bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 overflow-hidden",
-        "h-screen"
-      )}
-    >
-      <Sidebar open={open} setOpen={setOpen}>
-        <SidebarBody className="justify-between gap-10">
-          <div className="flex flex-col flex-1 pl-3 pt-3 overflow-y-auto overflow-x-hidden">
-            {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-8 flex flex-col gap-2">
-              {links.map((link, idx) => (
-                <SidebarLink key={idx} link={link} />
-              ))}
+    <>
+      <div
+        className={cn(
+          "rounded-md hidden md:flex flex-col md:flex-row bg-light_vanilla dark:bg-neutral-800 w-full flex-1 border border-neutral-200 overflow-hidden",
+          "h-screen"
+        )}
+      >
+        <Sidebar open={open} setOpen={setOpen}>
+          <SidebarBody className="justify-between gap-10">
+            <div className="flex flex-col flex-1 pl-3 pt-3 overflow-y-auto overflow-x-hidden">
+              {open ? <Logo /> : <LogoIcon />}
+              <div className="mt-8 flex flex-col gap-2">
+                {links.map((link, idx) => (
+                  <SidebarLink key={idx} link={link} />
+                ))}
+              </div>
             </div>
-          </div>
-          <div className={`flex flex-row items-center pb-4 pl-3`}>
-            <UserButton />
-          </div>
-        </SidebarBody>
-      </Sidebar>
-      <DropdownComponent params={params} />
-    </div>
+            <div className={`flex flex-row items-center pb-4 pl-3`}>
+              <UserButton />
+            </div>
+          </SidebarBody>
+        </Sidebar>
+        <EditData id={id} />
+      </div>
+      <div className="flex flex-col md:hidden bg-gray-100 min-h-screen items-center justify-center text-center">
+        <img src="CompetiboardLogo.png" className="w-1/3" />
+        <h1 className="font-dm font-semibold text-3xl pt-6 pb-2">
+          Mobile not supported
+        </h1>
+        <p className="text-gray-700 text-base">
+          Try Competiboard on a bigger device
+        </p>
+      </div>
+    </>
   );
 }
 export const Logo = () => {
