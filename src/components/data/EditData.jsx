@@ -1,5 +1,6 @@
 import React from "react";
 import AddDataSource from "./AddDataSource";
+import DataSettings from "./DataSettings";
 
 const CircleText = ({ text }) => (
   <div className="flex flex-row items-center">
@@ -26,6 +27,7 @@ const EditData = ({ id }) => {
     <div className="flex flex-grow flex-col w-full min-h-screen pb-20 bg-white rounded-tl-[40px] pl-10 pt-8 mt-0.5 overflow-y-auto">
       <Header title={"Edit Your Board's Data"} subtitle={"Data"} />
       <AddDataSource id={id} />
+      <DataSettings id={id} />
     </div>
   );
 };
