@@ -5,7 +5,7 @@ import {
   Sidebar,
   SidebarBody,
   SidebarLink,
-} from "../../components/global/Sidebar";
+} from "../../../components/global/Sidebar";
 import {
   IconBrandTabler,
   IconHammer,
@@ -17,9 +17,14 @@ import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Dashboard from "@/components/dashboard/Dashboard";
+import EditDisplay from "@/components/display/EditDisplay";
 
 export default function SidebarDemo({ params }) {
+  const unwrappedParams = React.use(params);
+
+  // Access the page property from the unwrapped params
+  const id = unwrappedParams.id;
+
   const links = [
     {
       label: "Dashboard",
@@ -81,7 +86,7 @@ export default function SidebarDemo({ params }) {
             </div>
           </SidebarBody>
         </Sidebar>
-        <Dashboard />
+        <EditDisplay id={id} />
       </div>
       <div className="flex flex-col md:hidden bg-gray-100 min-h-screen items-center justify-center text-center">
         <img src="CompetiboardLogo.png" className="w-1/3" />

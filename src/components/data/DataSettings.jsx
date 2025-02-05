@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useUser } from "@clerk/nextjs";
+import { useState, useEffect } from "react";
+import { ToastAction } from "../global/Toast";
+import { useToast } from "../global/Use-Toast";
 
 const DataSettings = ({ id }) => {
   const [filterFields, setFilterFields] = useState({
@@ -26,18 +29,68 @@ const DataSettings = ({ id }) => {
     displayField: "",
   });
 
+  const { user } = useUser();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchDataDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/data_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ board_id: id, clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch data details");
+
+        const result = await response.json();
+
+        if (result.data) {
+          setFilterFields(
+            result.data.filter_settings || { filterIn: "", filterOut: "" }
+          );
+          setDateSettings({
+            dateFormat: result.data.date_settings?.dateFormat || "",
+            tabs: ["Daily", "Monthly", "Yearly", "All-Time"],
+            selectedTabs: result.data.date_settings?.selectedTabs || [],
+          });
+          setSelectedMethod(result.data.method || "Doc Sum");
+          setSumFields(
+            result.data.method === "Doc Sum"
+              ? result.data.expression || {
+                  sumField: "",
+                  displayField: "",
+                }
+              : { sumField: "", displayField: "" }
+          );
+          setClassicFields(
+            result.data.method === "Classic"
+              ? result.data.expression || {
+                  valueField: "",
+                  displayField: "",
+                }
+              : { valueField: "", displayField: "" }
+          );
+        }
+      } catch (error) {
+        console.error("Error fetching data details:", error);
+      }
+    };
+
+    if (id && user?.id) fetchDataDetails();
+  }, [id, user]);
+
   const handleFilterChange = (field, value) => {
-    setFilterFields((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setFilterFields((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleDateChange = (value) => {
-    setDateSettings((prev) => ({
-      ...prev,
-      dateFormat: value,
-    }));
+    setDateSettings((prev) => ({ ...prev, dateFormat: value }));
   };
 
   const toggleTab = (tab) => {
@@ -50,22 +103,53 @@ const DataSettings = ({ id }) => {
   };
 
   const handleSumFieldChange = (field, value) => {
-    setSumFields((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setSumFields((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleClassicFieldChange = (field, value) => {
-    setClassicFields((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
+    setClassicFields((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = async () => {
+    const dataToSend = {
+      filter_settings: filterFields,
+      date_settings: dateSettings,
+      method: selectedMethod,
+      expression: selectedMethod === "Doc Sum" ? sumFields : classicFields,
+      clerk_id: user.id,
+      board_id: id,
+    };
+
+    try {
+      const response = await fetch(
+        "http://127.0.0.1:8000/api/update_data_settings/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(dataToSend),
+        }
+      );
+      if (!response.ok) throw new Error("Network response was not ok");
+
+      toast({
+        title: `Board Updated`,
+        description: "Good Progress =)",
+        action: (
+          <ToastAction onClick={() => {}} altText="Close">
+            Close
+          </ToastAction>
+        ),
+      });
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
 
   return (
     <div className="bg-white rounded-lg pt-16 font-dm">
-      <h2 className="text-3xl font-medium mb-4">Board Data Settings</h2>
+      <h2 className="text-3xl font-medium">Board Data Settings</h2>
       <div className="mt-4 mb-8 bg-light_coral/30 w-80 h-0.5" />
 
       {/* Filter Settings */}
@@ -200,6 +284,14 @@ const DataSettings = ({ id }) => {
           />
         </div>
       )}
+      <div>
+        <button
+          onClick={handleSubmit}
+          className="mt-8 px-6 py-2 bg-coral text-white rounded-md hover:bg-coral/80 transition-colors"
+        >
+          Save Settings
+        </button>
+      </div>
     </div>
   );
 };

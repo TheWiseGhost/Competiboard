@@ -57,7 +57,7 @@ export default function SidebarDemo({ params }) {
     },
     {
       label: "Edit Display",
-      href: "/board/builder",
+      href: "/board/display",
       icon: (
         <IconHammer className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
