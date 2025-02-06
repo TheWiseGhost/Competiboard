@@ -9,7 +9,7 @@ const AddDataSource = ({ id }) => {
   const [selectedSource, setSelectedSource] = useState("MongoDB");
   const [inputValues, setInputValues] = useState({
     MongoDB: { uri: "", collection: "", database: "" },
-    Supabase: { url: "", anonKey: "" },
+    Supabase: { url: "", anonKey: "", table: "" },
     Firebase: { apiKey: "", authDomain: "", projectId: "" },
     Sheet: { url: "" },
   });

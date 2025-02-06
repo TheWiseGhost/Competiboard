@@ -98,7 +98,7 @@ const DashboardComponent = () => {
     } finally {
       toast({
         title: `Board Added: ${title}`,
-        description: "Start building your board when your ready",
+        description: "Refresh the page to see it",
         action: (
           <ToastAction
             onClick={() => {
@@ -154,7 +154,7 @@ const DashboardComponent = () => {
   return (
     <>
       {boards.length > 0 ? (
-        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 items-start">
+        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 items-start pb-8">
           {boards.map((board) => (
             <GridItem
               key={board.id}
@@ -168,53 +168,53 @@ const DashboardComponent = () => {
           <p className="font-dm text-rubarb">
             Create Your First Board to get started with Competiboard
           </p>
-          <Drawer>
-            <DrawerTrigger>
-              <span className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
-                Create Board
-              </span>
-            </DrawerTrigger>
-            <DrawerContent>
-              <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
-                <div className="mx-auto h-2 rounded-2xl bg-light_vanilla w-1/5"></div>
-                <DrawerHeader>
-                  <DrawerTitle className="font-dm text-4xl text-coral pt-6">
-                    Create a New Board
-                  </DrawerTitle>
-                </DrawerHeader>
-                <div className="p-4">
-                  <div className="pb-2 font-dm">
-                    <input
-                      type="text"
-                      value={title}
-                      onChange={handleTitleChange}
-                      placeholder="Enter title"
-                      className="border w-full border-vanilla rounded-lg p-3 text-gray-700 active:border-coral"
-                      maxLength="100"
-                    ></input>
-                  </div>
-                  <div className="pb-4">
-                    <FileUpload
-                      onChange={handleFileUpload}
-                      target={"Board Thumbnail"}
-                    />
-                  </div>
-                </div>
-                <DrawerFooter>
-                  <DrawerClose>
-                    <button
-                      onClick={handleUpload}
-                      className="bg-coral font-dm w-4/5 mx-auto text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none"
-                    >
-                      Create
-                    </button>
-                  </DrawerClose>
-                </DrawerFooter>
-              </div>
-            </DrawerContent>
-          </Drawer>
         </div>
       )}
+      <Drawer>
+        <DrawerTrigger>
+          <span className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
+            Create Board
+          </span>
+        </DrawerTrigger>
+        <DrawerContent>
+          <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
+            <div className="mx-auto h-2 rounded-2xl bg-light_vanilla w-1/5"></div>
+            <DrawerHeader>
+              <DrawerTitle className="font-dm text-4xl text-coral pt-6">
+                Create a New Board
+              </DrawerTitle>
+            </DrawerHeader>
+            <div className="p-4">
+              <div className="pb-2 font-dm">
+                <input
+                  type="text"
+                  value={title}
+                  onChange={handleTitleChange}
+                  placeholder="Enter title"
+                  className="border w-full border-vanilla rounded-lg p-3 text-gray-700 active:border-coral"
+                  maxLength="100"
+                ></input>
+              </div>
+              <div className="pb-4">
+                <FileUpload
+                  onChange={handleFileUpload}
+                  target={"Board Thumbnail"}
+                />
+              </div>
+            </div>
+            <DrawerFooter>
+              <DrawerClose>
+                <span
+                  onClick={handleUpload}
+                  className="bg-coral font-dm w-4/5 mx-auto text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none"
+                >
+                  Create
+                </span>
+              </DrawerClose>
+            </DrawerFooter>
+          </div>
+        </DrawerContent>
+      </Drawer>
     </>
   );
 };

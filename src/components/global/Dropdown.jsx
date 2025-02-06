@@ -82,12 +82,7 @@ const Dropdown = ({ page }) => {
 
 const Option = ({ text, page, id }) => {
   const { user } = useUser();
-  let route = "";
-  if (page === "builder") {
-    route = `/builder/${id}/landing/`;
-  } else {
-    route = `/${page}/${id}`;
-  }
+  let route = `/${page}/${id}`;
 
   const handleClick = async () => {
     try {

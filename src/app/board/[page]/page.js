@@ -8,12 +8,11 @@ import {
   SidebarLink,
 } from "../../../components/global/Sidebar";
 import {
-  IconArrowLeft,
   IconBrandTabler,
   IconHammer,
   IconSettings,
   IconReportAnalytics,
-  IconCirclePlus,
+  IconEye,
 } from "@tabler/icons-react";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
@@ -49,10 +48,10 @@ export default function SidebarDemo({ params }) {
       ),
     },
     {
-      label: "Add Source",
-      href: "/add_source",
+      label: "View Board",
+      href: "/board/live",
       icon: (
-        <IconCirclePlus className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconEye className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
       ),
     },
     {
