@@ -8,10 +8,13 @@ import { useToast } from "../global/Use-Toast";
 const DisplaySettings = ({ id }) => {
   const [settings, setSettings] = useState({
     borders: "",
-    background: "",
-    primaryText: "",
-    secondaryText: "",
-    boardTitles: "",
+    boardBackground: "",
+    pageBackground: "",
+    titleColor: "",
+    subtitleColor: "",
+    dateRange: "",
+    tableHeaders: "",
+    ranks: "",
     rankingField: "",
     nameField: "",
     title: "",
@@ -107,10 +110,13 @@ const DisplaySettings = ({ id }) => {
             <h3 className="text-2xl font-medium mb-4">Colors:</h3>
             {[
               "borders",
-              "background",
-              "primaryText",
-              "secondaryText",
-              "boardTitles",
+              "boardBackground",
+              "pageBackground",
+              "titleColor",
+              "subtitleColor",
+              "dateRange",
+              "tableHeaders",
+              "ranks",
               "rankingField",
               "nameField",
             ].map((field) => (

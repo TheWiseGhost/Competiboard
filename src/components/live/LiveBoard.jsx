@@ -11,17 +11,20 @@ const LiveBoard = ({ id }) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [settings, setSettings] = useState({
-    borders: "#d1d1d1",
-    background: "#f9f9f9",
-    primaryText: "#333333",
-    secondaryText: "#555555",
-    boardTitles: "#4a90e2",
-    rankingField: "#e94e77",
-    nameField: "#f39c12",
-    title: "NoteSlide Views",
-    subtitle: "Who has the most views?",
-    rankingTitle: "Views",
-    nameText: "Username",
+    borders: "",
+    boardBackground: "",
+    pageBackground: "",
+    titleColor: "",
+    subtitleColor: "",
+    dateRange: "",
+    tableHeaders: "",
+    ranks: "",
+    rankingField: "",
+    nameField: "",
+    title: "",
+    subtitle: "",
+    rankingTitle: "",
+    nameText: "",
   });
 
   useEffect(() => {
@@ -87,70 +90,171 @@ const LiveBoard = ({ id }) => {
 
   return (
     <div
-      className="p-4 shadow-lg rounded-xl w-1/2"
+      className="w-full font-dm px-20 min-h-screen pt-12 pb-20"
       style={{
-        backgroundColor: settings.background,
-        border: `1px solid ${settings.borders}`,
+        backgroundColor: settings.pageBackground,
       }}
     >
       <h2
-        className="text-xl font-bold text-center mb-2"
-        style={{ color: settings.boardTitles }}
+        className="text-5xl font-dm font-bold mb-4 text-left"
+        style={{ color: settings.titleColor }}
       >
         {settings.title}
       </h2>
-      <p className="text-center mb-4" style={{ color: settings.secondaryText }}>
+      <p
+        className="text-left text-lg mb-4"
+        style={{ color: settings.subtitleColor }}
+      >
         {settings.subtitle}
       </p>
 
-      <div className="overflow-x-auto">
-        <table
-          className="w-full border-collapse"
-          style={{ border: `1px solid ${settings.borders}` }}
-        >
-          <thead>
-            <tr
-              style={{ backgroundColor: settings.primaryText, color: "#fff" }}
-            >
-              <th
-                className="p-2 text-left"
-                style={{ borderBottom: `1px solid ${settings.borders}` }}
-              >
-                {settings.nameText}
-              </th>
-              <th
-                className="p-2 text-right"
-                style={{ borderBottom: `1px solid ${settings.borders}` }}
-              >
-                {settings.rankingTitle}
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {leaderboard.map(([name, score], index) => (
-              <tr
-                key={index}
-                style={{ borderBottom: `1px solid ${settings.borders}` }}
-              >
-                <td
-                  className="p-2 flex items-center"
-                  style={{ color: settings.nameField }}
+      <div className="flex flex-row w-full space-x-12">
+        <div className="overflow-x-auto w-1/2">
+          <h2
+            className="pb-4 pt-6 text-xl font-mon font-bold text-gray"
+            style={{ color: settings.dateRange }}
+          >
+            All-time
+          </h2>
+          <div
+            className="overflow-x-auto w-full rounded-2xl p-4"
+            style={{
+              border: `1px solid ${settings.borders}`,
+              backgroundColor: settings.boardBackground,
+            }}
+          >
+            <table className="w-full border-none">
+              <thead>
+                <tr
+                  className="border-none"
+                  style={{ color: settings.tableHeaders }}
                 >
-                  {index < 3 ? (
-                    <span className="mr-2">{medals[index]}</span>
-                  ) : null}
-                  {name}
-                </td>
-                <td
-                  className="p-2 text-right"
-                  style={{ color: settings.rankingField }}
+                  <th
+                    className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    Rank
+                  </th>
+                  <th
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {settings.nameText}
+                  </th>
+                  <th
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {settings.rankingTitle}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="space-y-2">
+                {leaderboard.map(([name, score], index) => (
+                  <tr key={index} className="border-none">
+                    <td className="py-4 px-4 w-1/6 text-center">
+                      {index < 3 ? (
+                        <p className="text-3xl">{medals[index]}</p>
+                      ) : (
+                        <p
+                          className="text-xl text-center font-afc"
+                          style={{ color: settings.ranks }}
+                        >
+                          {index + 1}
+                        </p>
+                      )}
+                    </td>
+                    <td
+                      className="py-4 px-4 w-1/2 text-xl font-afc font-semibold"
+                      style={{ color: settings.nameField }}
+                    >
+                      {name}
+                    </td>
+                    <td
+                      className="py-4 px-4 w-1/3 text-left text-xl font-afc font-semibold"
+                      style={{ color: settings.rankingField }}
+                    >
+                      {score}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div className="overflow-x-auto w-1/2">
+          <h2
+            className="pb-4 pt-6 text-xl font-mon font-bold text-gray"
+            style={{ color: settings.dateRange }}
+          >
+            Last 30 Days
+          </h2>
+          <div
+            className="overflow-x-auto w-full rounded-2xl p-4"
+            style={{
+              border: `1px solid ${settings.borders}`,
+              backgroundColor: settings.boardBackground,
+            }}
+          >
+            <table className="w-full border-none">
+              <thead>
+                <tr
+                  className="border-none"
+                  style={{ color: settings.tableHeaders }}
                 >
-                  {score}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+                  <th
+                    className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    Rank
+                  </th>
+                  <th
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {settings.nameText}
+                  </th>
+                  <th
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
+                    style={{ textTransform: "uppercase" }}
+                  >
+                    {settings.rankingTitle}
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="space-y-2">
+                {leaderboard.map(([name, score], index) => (
+                  <tr key={index} className="border-none">
+                    <td className="py-4 px-4 w-1/6 text-center">
+                      {index < 3 ? (
+                        <p className="text-3xl">{medals[index]}</p>
+                      ) : (
+                        <p
+                          className="text-xl text-center font-afc"
+                          style={{ color: settings.ranks }}
+                        >
+                          {index + 1}
+                        </p>
+                      )}
+                    </td>
+                    <td
+                      className="py-4 px-4 w-1/2 text-xl font-afc font-semibold"
+                      style={{ color: settings.nameField }}
+                    >
+                      {name}
+                    </td>
+                    <td
+                      className="py-4 px-4 w-1/3 text-left text-xl font-afc font-semibold"
+                      style={{ color: settings.rankingField }}
+                    >
+                      {score}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
   );

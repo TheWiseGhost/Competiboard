@@ -184,7 +184,12 @@ const DataSettings = ({ id }) => {
 
         {/* Date Settings */}
         <div>
-          <h3 className="text-2xl font-medium mb-4">Date Settings</h3>
+          <h3 className="text-2xl items-center flex font-medium mb-4">
+            Date Settings{" "}
+            <span className="text-base text-gray-700 ml-4">
+              (Under development)
+            </span>
+          </h3>
           <div className="flex flex-row items-center mt-4">
             <div className="rounded-full size-2 bg-coral" />
             <label className="block font-medium pl-2 pr-4">Date Format:</label>
