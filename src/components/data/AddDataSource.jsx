@@ -8,7 +8,7 @@ import { useToast } from "../global/Use-Toast";
 const AddDataSource = ({ id }) => {
   const [selectedSource, setSelectedSource] = useState("MongoDB");
   const [inputValues, setInputValues] = useState({
-    MongoDB: { uri: "", collection: "", database: "" },
+    MongoDB: { uri: "", database: "", collection: "" },
     Supabase: { url: "", anonKey: "", table: "" },
     Firebase: { apiKey: "", authDomain: "", projectId: "" },
     Sheet: { url: "" },
@@ -17,7 +17,6 @@ const AddDataSource = ({ id }) => {
   const { user } = useUser();
   const { toast } = useToast();
 
-  // Fetch existing data details
   useEffect(() => {
     const fetchDataDetails = async () => {
       try {

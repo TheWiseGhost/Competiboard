@@ -81,48 +81,10 @@ const Dropdown = ({ page }) => {
 };
 
 const Option = ({ text, page, id }) => {
-  const { user } = useUser();
   let route = `/${page}/${id}`;
 
-  const handleClick = async () => {
-    try {
-      const main_response = await fetch(
-        "https://boardfastbackend.onrender.com/api/board_details/",
-        {
-          method: "POST",
-          body: JSON.stringify({ board_id: id }),
-        }
-      );
-      if (main_response.ok) {
-        const data = await main_response.json();
-        localStorage.setItem("board", JSON.stringify(data));
-        if (page === "builder") {
-          localStorage.setItem("formData", JSON.stringify(data.form.form_data));
-          localStorage.setItem("checkout", JSON.stringify(data.checkout));
-        } else if (page === "analytics") {
-          const response = await fetch(
-            "https://boardfastbackend.onrender.com/api/get_analytics/",
-            {
-              method: "POST",
-              body: JSON.stringify({ board_id: id, clerk_id: user.id }),
-            }
-          );
-
-          if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem("analytics", JSON.stringify(data));
-          } else {
-            console.error("Failed to fetch analytics");
-          }
-        }
-      } else {
-        console.error("Failed to fetch boards");
-      }
-    } catch (error) {
-      console.error("Error fetching boards:", error);
-    } finally {
-      window.location.href = route;
-    }
+  const handleClick = () => {
+    window.location.href = route;
   };
 
   return (

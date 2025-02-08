@@ -24,7 +24,7 @@ const DisplaySettings = ({ id }) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    const fetchDataDetails = async () => {
+    const fetchBoardDetails = async () => {
       try {
         const response = await fetch(
           "http://127.0.0.1:8000/api/board_details/",
@@ -53,7 +53,7 @@ const DisplaySettings = ({ id }) => {
       }
     };
 
-    if (id && user?.id) fetchDataDetails();
+    if (id && user?.id) fetchBoardDetails();
   }, [id, user]);
 
   const handleChange = (field, value) => {

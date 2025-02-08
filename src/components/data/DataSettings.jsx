@@ -241,7 +241,9 @@ const DataSettings = ({ id }) => {
       {/* Field Sum Inputs */}
       {selectedMethod === "Doc Sum" ? (
         <div className="mt-10 flex flex-wrap gap-y-6 gap-x-4 pr-80 items-center">
-          <p className="text-lg font-medium">Grab all documents and sum</p>
+          <p className="text-lg font-medium">
+            Grab all filtered documents and sum field:
+          </p>
           <input
             type="text"
             className="p-3 rounded-md bg-light_vanilla focus:bg-white"
@@ -249,7 +251,9 @@ const DataSettings = ({ id }) => {
             value={sumFields.sumField}
             onChange={(e) => handleSumFieldChange("sumField", e.target.value)}
           />
-          <p className="text-lg font-medium">and store it for:</p>
+          <p className="text-lg font-medium">
+            and use it to sort rows. For each row, make the display field:
+          </p>
           <input
             type="text"
             className="p-3 rounded-md bg-light_vanilla focus:bg-white"
@@ -262,7 +266,9 @@ const DataSettings = ({ id }) => {
         </div>
       ) : (
         <div className="mt-10 flex flex-wrap gap-y-6 gap-x-4 pr-80 items-center">
-          <p className="text-lg font-medium">Take value field</p>
+          <p className="text-lg font-medium">
+            Grab all filtered documents and take value field:
+          </p>
           <input
             type="text"
             className="p-3 rounded-md bg-light_vanilla focus:bg-white"
@@ -272,7 +278,9 @@ const DataSettings = ({ id }) => {
               handleClassicFieldChange("valueField", e.target.value)
             }
           />
-          <p className="text-lg font-medium">and store it for:</p>
+          <p className="text-lg font-medium">
+            and use it to sort rows. For each row, make the display field:
+          </p>
           <input
             type="text"
             className="p-3 rounded-md bg-light_vanilla focus:bg-white"
