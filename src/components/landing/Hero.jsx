@@ -32,7 +32,7 @@ const Hero = () => {
   return (
     <div className="min-h-screen bg-white">
       {/* Navbar */}
-      <nav className="flex items-center justify-between px-6 pt-6">
+      <nav className="flex items-center justify-between px-6 pt-8">
         <div className="flex items-center gap-2">
           <img
             src="CompetiboardLogo.png"
@@ -62,9 +62,9 @@ const Hero = () => {
       </nav>
 
       {/* Main Content */}
-      <main className=" flex flex-col mx-auto mt-20 text-center px-4">
-        <h1 className="text-6xl font-bold mb-8 font-euclid">
-          <span className="text-7xl pr-2">🥇</span>
+      <main className=" flex flex-col mx-auto mt-16 text-center px-4">
+        <h1 className="text-7xl font-bold mb-8 font-euclid">
+          <span className="text-8xl pr-2">🥇</span>
           <span className="inline-block bg-black text-white pl-3 pr-4 py-2 mr-2">
             Boost
           </span>
@@ -75,11 +75,13 @@ const Hero = () => {
           <span className="text-red-500">.</span>
         </h1>
 
-        <p className="text-lg text-gray-800 text-center w-[750px] mb-12 mx-auto font-afc leading-8">
+        <p className="text-xl text-gray-800 text-center w-[850px] mb-12 mx-auto font-afc leading-8">
           Competiboard helps you effortlessly launch your{" "}
           <span className="font-bold">Custom Leaderboard</span> based on your
           users to generate{" "}
-          <span className="bg-coral/60 px-2 rounded">healthy competition.</span>{" "}
+          <span className="bg-coral/90 text-black px-2 rounded">
+            healthy competition.
+          </span>{" "}
           Board builder, rewards, backend, db connections, filtering, all done
           for you
         </p>
@@ -98,7 +100,7 @@ const Hero = () => {
 
           <button
             onClick={() => (window.location.href = "/dashboard")}
-            className="bg-black font-inter font-semibold text-white px-6 py-2 rounded-full hover:bg-coral transition-colors"
+            className="border border-white relative py-2 px-5 text-white text-base font-bold overflow-hidden bg-black rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-coral before:to-coral before:transition-all before:duration-300 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
           >
             Get started for free
           </button>

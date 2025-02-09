@@ -42,6 +42,27 @@
   font-style: normal;
 }
 
+/* The main scrollbar width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* The scrollbar track (background) */
+::-webkit-scrollbar-track {
+  background: #ffffff;
+}
+
+/* The draggable scrolling handle */
+::-webkit-scrollbar-thumb {
+  background: #ff6c63;
+  border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff4f45;
+}
+
 body {
   color: var(--foreground);
   background: var(--background);
