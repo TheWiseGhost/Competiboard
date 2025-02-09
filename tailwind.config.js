@@ -25,6 +25,7 @@ module.exports = {
         inter: ["var(--font-inter)"],
         mon: ["var(--font-mon)"],
         afc: ["var(--font-afc)"],
+        euclid: ["Euclid Circular B", "sans-serif"],
       },
       colors: {
         vanilla: "#F6C368",
