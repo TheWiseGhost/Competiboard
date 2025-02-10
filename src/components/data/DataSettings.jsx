@@ -12,6 +12,7 @@ const DataSettings = ({ id }) => {
   });
 
   const [dateSettings, setDateSettings] = useState({
+    dateField: "",
     dateFormat: "",
     tabs: ["Daily", "Monthly", "Yearly", "All-Time"],
     selectedTabs: [],
@@ -89,7 +90,11 @@ const DataSettings = ({ id }) => {
     setFilterFields((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleDateChange = (value) => {
+  const handleDateFieldChange = (value) => {
+    setDateSettings((prev) => ({ ...prev, dateField: value }));
+  };
+
+  const handleDateFormatChange = (value) => {
     setDateSettings((prev) => ({ ...prev, dateFormat: value }));
   };
 
@@ -192,12 +197,22 @@ const DataSettings = ({ id }) => {
           </h3>
           <div className="flex flex-row items-center mt-4">
             <div className="rounded-full size-2 bg-coral" />
+            <label className="block font-medium pl-2 pr-4">Date Field:</label>
+            <input
+              className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+              type="text"
+              value={dateSettings.dateField}
+              onChange={(e) => handleDateFieldChange(e.target.value)}
+            />
+          </div>
+          <div className="flex flex-row items-center mt-4">
+            <div className="rounded-full size-2 bg-coral" />
             <label className="block font-medium pl-2 pr-4">Date Format:</label>
             <input
               className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
               type="text"
               value={dateSettings.dateFormat}
-              onChange={(e) => handleDateChange(e.target.value)}
+              onChange={(e) => handleDateFormatChange(e.target.value)}
             />
           </div>
           <div className="flex flex-row items-center mt-4 mb-2">

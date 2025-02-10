@@ -8,6 +8,7 @@ const medals = ["🥇", "🥈", "🥉"];
 const LiveBoard = ({ id }) => {
   const { user } = useUser();
   const [leaderboard, setLeaderboard] = useState([]);
+  const [last30DaysLeaderboard, setLast30DaysLeaderboard] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [settings, setSettings] = useState({
@@ -75,9 +76,34 @@ const LiveBoard = ({ id }) => {
       }
     };
 
+    const fetchLast30DaysLeaderboard = async () => {
+      if (!user || !id) return;
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/generate_30_days_leaderboard/",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ board_id: id, clerk_id: user.id }),
+          }
+        );
+
+        const data = await response.json();
+        if (!response.ok)
+          throw new Error(
+            data.error || "Failed to fetch last 30 days leaderboard"
+          );
+
+        setLast30DaysLeaderboard(data.leaderboard || []);
+      } catch (err) {
+        console.error("Error fetching last 30 days leaderboard:", err);
+      }
+    };
+
     if (id && user?.id) {
       fetchBoardDetails();
       fetchLeaderboard();
+      fetchLast30DaysLeaderboard();
     }
   }, [id, user]);
 
@@ -129,22 +155,13 @@ const LiveBoard = ({ id }) => {
                   className="border-none"
                   style={{ color: settings.tableHeaders }}
                 >
-                  <th
-                    className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm">
                     Rank
                   </th>
-                  <th
-                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm">
                     {settings.nameText}
                   </th>
-                  <th
-                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm">
                     {settings.rankingTitle}
                   </th>
                 </tr>
@@ -182,6 +199,7 @@ const LiveBoard = ({ id }) => {
             </table>
           </div>
         </div>
+
         <div className="overflow-x-auto w-1/2">
           <h2
             className="pb-4 pt-6 text-xl font-mon font-bold text-gray"
@@ -202,28 +220,19 @@ const LiveBoard = ({ id }) => {
                   className="border-none"
                   style={{ color: settings.tableHeaders }}
                 >
-                  <th
-                    className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm">
                     Rank
                   </th>
-                  <th
-                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm">
                     {settings.nameText}
                   </th>
-                  <th
-                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
-                    style={{ textTransform: "uppercase" }}
-                  >
+                  <th className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm">
                     {settings.rankingTitle}
                   </th>
                 </tr>
               </thead>
               <tbody className="space-y-2">
-                {leaderboard.map(([name, score], index) => (
+                {last30DaysLeaderboard.map(([name, score], index) => (
                   <tr key={index} className="border-none">
                     <td className="py-4 px-4 w-1/6 text-center">
                       {index < 3 ? (
