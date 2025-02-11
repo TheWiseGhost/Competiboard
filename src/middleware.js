@@ -3,9 +3,7 @@ import { NextResponse } from "next/server";
 
 export const config = {
   matcher: [
-    // Skip Next.js internals and all static files, unless found in search params
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
-    // Always run for API routes
     "/(api|trpc)(.*)",
   ],
 };
@@ -21,10 +19,10 @@ const isPublicRoute = createRouteMatcher([
   "/privacy",
 ]);
 
-export default clerkMiddleware(async (auth, request) => {
-  const { nextUrl } = request;
+export default clerkMiddleware((auth, request) => {
+  const { nextUrl, headers } = request;
+  const host = headers.get("host"); // Get the domain name from the request headers
 
-  // Allow requests to /live/* and /api/*
   if (
     nextUrl.pathname.startsWith("/live/") ||
     nextUrl.pathname.startsWith("/api/")
@@ -32,9 +30,16 @@ export default clerkMiddleware(async (auth, request) => {
     return NextResponse.next();
   }
 
-  // Redirect to sign-in if the route is protected and user is not authenticated
   if (!isPublicRoute(request)) {
-    await auth().protect();
+    // Add await here
+    auth().protect();
     return NextResponse.next();
+  }
+
+  if (host === "localhost:3000") {
+    return NextResponse.next(); // Allow access for your main domain
+  } else {
+    // Redirect to your main domain if the request is not for /live/*
+    return NextResponse.redirect(new URL("http://localhost:3000", request.url));
   }
 });
