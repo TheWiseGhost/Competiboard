@@ -2,7 +2,7 @@ import React from "react";
 
 const Features = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen" id="features">
       <div className="h-1 bg-black w-full mb-24"></div>
       <div className="flex flex-col space-y-4 text-left font-euclid items-center">
         <div className="flex flex-row items-start">

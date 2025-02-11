@@ -35,6 +35,9 @@ export default function RootLayout({ children }) {
       publishableKey={process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
     >
       <html lang="en">
+        <head>
+          <link rel="icon" type="image/png" href="CompetiboardLogo.png" />
+        </head>
         <body
           className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable}`}
         >

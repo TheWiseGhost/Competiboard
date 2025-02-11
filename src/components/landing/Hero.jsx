@@ -6,10 +6,7 @@ const Hero = () => {
   const [companyName, setCompanyName] = useState("");
 
   const NavButton = ({ text, href }) => (
-    <a
-      onClick={() => window.open(href)}
-      className="cursor-pointer font-inter text-sm"
-    >
+    <a href={href} className="cursor-pointer font-inter text-sm">
       <span className="text_button">
         <span className="span-mother">
           {text.split("").map((char, index) => (
@@ -45,9 +42,59 @@ const Hero = () => {
         </div>
 
         <div className="flex gap-6">
-          <NavButton text="Process" href="/how-it-works" />
-          <NavButton text="Pricing" href="/pricing" />
-          <NavButton text="Features" href="/features" />
+          <NavButton text="Process" href="#process" />
+          <a
+            onClick={() => window.open("/checkout")}
+            className="cursor-pointer font-inter text-sm"
+          >
+            <span className="text_button">
+              <span className="span-mother">
+                {"Pricing".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+              <span className="span-mother2">
+                {"Pricing".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+            </span>
+          </a>
+          <NavButton text="Features" href="#features" />
+          <a
+            onClick={() => window.open("/privacy")}
+            className="cursor-pointer font-inter text-sm"
+          >
+            <span className="text_button">
+              <span className="span-mother">
+                {"Privacy".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+              <span className="span-mother2">
+                {"Privacy".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+            </span>
+          </a>
+          <a
+            onClick={() => window.open("/terms")}
+            className="cursor-pointer font-inter text-sm"
+          >
+            <span className="text_button">
+              <span className="span-mother">
+                {"Terms".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+              <span className="span-mother2">
+                {"Terms".split("").map((char, index) => (
+                  <span key={index}>{char}</span>
+                ))}
+              </span>
+            </span>
+          </a>
         </div>
 
         <a
@@ -79,7 +126,7 @@ const Hero = () => {
           Competiboard helps you effortlessly launch your{" "}
           <span className="font-bold">Custom Leaderboard</span> based on your
           users to generate{" "}
-          <span className="bg-coral/90 text-black px-2 rounded">
+          <span className="bg-coral/80 text-black px-2 rounded">
             healthy competition.
           </span>{" "}
           Board builder, rewards, backend, db connections, filtering, all done
@@ -100,7 +147,7 @@ const Hero = () => {
 
           <button
             onClick={() => (window.location.href = "/dashboard")}
-            className="border border-white relative py-2 px-5 text-white text-base font-bold overflow-hidden bg-black rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-coral before:to-coral before:transition-all before:duration-300 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
+            className="border border-white relative py-2 px-5 text-white text-base font-bold overflow-hidden bg-black rounded-full transition-all duration-400 ease-in-out shadow-md hover:scale-100 before:absolute before:top-0 before:-left-full before:w-full before:h-full before:bg-gradient-to-r before:from-red-400 before:to-red-400 before:transition-all before:duration-300 before:ease-in-out before:z-[-1] before:rounded-full hover:before:left-0"
           >
             Get started for free
           </button>

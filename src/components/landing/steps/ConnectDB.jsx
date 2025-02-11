@@ -1,6 +1,6 @@
 const ConnectDB = () => {
   return (
-    <div className="bg-[#FFC7C3] h-screen">
+    <div className="bg-[#FFC7C3] h-screen" id="process">
       <div className="h-1 bg-black w-full mb-10"></div>
       <div className="flex flex-row gap-12">
         {/* Left Side */}

@@ -1,7 +1,7 @@
 "use client";
 
 import Dropdown from "@/components/global/Dropdown";
-import React, { useState } from "react";
+import React, { useState, use } from "react";
 import {
   Sidebar,
   SidebarBody,
@@ -38,7 +38,8 @@ const DropdownComponent = ({ params }) => {
   );
 };
 
-export default function SidebarDemo({ params }) {
+export default function SidebarDemo(props) {
+  const params = use(props.params);
   const links = [
     {
       label: "Dashboard",
