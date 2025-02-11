@@ -36,10 +36,32 @@ const AddDataSource = ({ id }) => {
         const result = await response.json();
 
         if (result.data) {
-          setSelectedSource(result.data.source);
+          setSelectedSource(result.data.source || "MongoDB");
+
+          // Merge fetched data with defaults for each source
           setInputValues((prev) => ({
-            ...prev,
-            [result.data.source]: result.data.api,
+            MongoDB: {
+              uri: "",
+              database: "",
+              collection: "",
+              ...(result.data.source === "MongoDB" ? result.data.api : {}),
+            },
+            Supabase: {
+              url: "",
+              anonKey: "",
+              table: "",
+              ...(result.data.source === "Supabase" ? result.data.api : {}),
+            },
+            Firebase: {
+              apiKey: "",
+              authDomain: "",
+              projectId: "",
+              ...(result.data.source === "Firebase" ? result.data.api : {}),
+            },
+            Sheet: {
+              url: "",
+              ...(result.data.source === "Sheet" ? result.data.api : {}),
+            },
           }));
         }
       } catch (error) {

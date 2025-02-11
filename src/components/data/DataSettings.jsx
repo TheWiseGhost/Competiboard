@@ -52,31 +52,36 @@ const DataSettings = ({ id }) => {
         const result = await response.json();
 
         if (result.data) {
-          setFilterFields(
-            result.data.filter_settings || { filterIn: "", filterOut: "" }
-          );
+          // Merge filter settings with defaults
+          setFilterFields({
+            filterIn: "",
+            filterOut: "",
+            ...(result.data.filter_settings || {}),
+          });
+
+          // Set date settings with individual field checks
           setDateSettings({
+            dateField: result.data.date_settings?.dateField || "",
             dateFormat: result.data.date_settings?.dateFormat || "",
             tabs: ["Daily", "Monthly", "Yearly", "All-Time"],
             selectedTabs: result.data.date_settings?.selectedTabs || [],
           });
+
           setSelectedMethod(result.data.method || "Doc Sum");
-          setSumFields(
-            result.data.method === "Doc Sum"
-              ? result.data.expression || {
-                  sumField: "",
-                  displayField: "",
-                }
-              : { sumField: "", displayField: "" }
-          );
-          setClassicFields(
-            result.data.method === "Classic"
-              ? result.data.expression || {
-                  valueField: "",
-                  displayField: "",
-                }
-              : { valueField: "", displayField: "" }
-          );
+
+          // Merge sum fields with defaults if method is Doc Sum
+          setSumFields({
+            sumField: "",
+            displayField: "",
+            ...(result.data.method === "Doc Sum" ? result.data.expression : {}),
+          });
+
+          // Merge classic fields with defaults if method is Classic
+          setClassicFields({
+            valueField: "",
+            displayField: "",
+            ...(result.data.method === "Classic" ? result.data.expression : {}),
+          });
         }
       } catch (error) {
         console.error("Error fetching data details:", error);
@@ -190,10 +195,7 @@ const DataSettings = ({ id }) => {
         {/* Date Settings */}
         <div>
           <h3 className="text-2xl items-center flex font-medium mb-4">
-            Date Settings{" "}
-            <span className="text-base text-gray-700 ml-4">
-              (Under development)
-            </span>
+            Date Settings
           </h3>
           <div className="flex flex-row items-center mt-4">
             <div className="rounded-full size-2 bg-coral" />
@@ -217,7 +219,12 @@ const DataSettings = ({ id }) => {
           </div>
           <div className="flex flex-row items-center mt-4 mb-2">
             <div className="rounded-full size-2 bg-coral" />
-            <label className="block font-medium pl-2">Include Tabs:</label>
+            <label className="block font-medium pl-2">
+              Include Tabs:
+              <span className="text-base text-gray-700 ml-4">
+                (Under development)
+              </span>
+            </label>
           </div>
 
           <div className="flex flex-wrap gap-2">

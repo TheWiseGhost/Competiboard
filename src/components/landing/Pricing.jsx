@@ -1,6 +1,47 @@
+"use client";
+
 import React from "react";
+import { useUser } from "@clerk/nextjs";
 
 const Pricing = () => {
+  const { user } = useUser();
+  const createCheckout = (prod_id) => {
+    try {
+      if (!user) {
+        window.open(
+          "/sign-in?redirect_url=http%3A%2F%2Ftrydropfast.com%3A3000%2Fcheckout"
+        );
+      }
+      const create = async () => {
+        try {
+          const response = await fetch(
+            "http://127.0.0.1:8000/api/create_checkout_session/",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                product_id: prod_id,
+                user_id: user?.id, // Pass the user ID from localStorage or state
+              }),
+            }
+          );
+
+          const data = await response.json();
+          if (data.url) {
+            window.location.href = data.url; // Redirect to Stripe checkout
+          }
+        } catch (error) {
+          console.error("Error creating checkout session:", error);
+        }
+      };
+
+      create();
+    } catch (error) {
+      console.error("Error creating checkout session:", error);
+    }
+  };
   return (
     <div className="min-h-screen pt-40 pb-8 px-4 md:px-24">
       <h1 className="text-7xl font-euclid font-semibold mb-12">
@@ -17,7 +58,10 @@ const Pricing = () => {
             </p>
           </div>
           <div className="text-4xl font-bold mb-6">Free</div>
-          <button className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 hover:bg-opacity-15 mx-auto hover:bg-white transition-colors">
+          <button
+            onClick={() => window.open("/dashboard")}
+            className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 hover:bg-opacity-15 mx-auto hover:bg-white transition-colors"
+          >
             Get Started
           </button>
         </div>
@@ -37,7 +81,10 @@ const Pricing = () => {
             <span className="text-4xl font-bold">$9</span>
             <span className="text-gray-800 text-sm">/month</span>
           </div>
-          <button className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 hover:bg-opacity-15 mx-auto hover:bg-white transition-colors">
+          <button
+            onClick={() => createCheckout("prod_RkfoQuyM98ny66")}
+            className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 hover:bg-opacity-15 mx-auto hover:bg-white transition-colors"
+          >
             Get Started
           </button>
         </div>
@@ -54,7 +101,12 @@ const Pricing = () => {
             <span className="text-4xl font-bold">$??</span>
             <span className="text-gray-800 text-sm">/once</span>
           </div>
-          <button className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 mx-auto hover:bg-slate-100 transition-colors">
+          <button
+            onClick={() =>
+              window.alert("Email our founder - byjuaditya@gmail.com")
+            }
+            className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 mx-auto hover:bg-slate-100 transition-colors"
+          >
             Get Started
           </button>
         </div>
