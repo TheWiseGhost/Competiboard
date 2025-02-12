@@ -30,10 +30,9 @@ module.exports = {
       colors: {
         vanilla: "#F6C368",
         light_vanilla: "#FBF2C0",
-        coral: "#F96F5D",
+        coral: "#FF4438",
         light_coral: "#FF6C63",
         rubarb: "#C06E52",
-        bark: "#43281C",
       },
       keyframes: {
         "accordion-down": {

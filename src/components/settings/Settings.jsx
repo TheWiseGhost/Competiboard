@@ -14,10 +14,10 @@ const Header = ({ title, subtitle }) => (
     <div className="flex items-center gap-2">
       <CircleText text="Competiboard" />
       <span>/</span>
-      <span className="text-bark text-sm">{subtitle}</span>
+      <span className="text-black text-sm">{subtitle}</span>
     </div>
     <div>
-      <h1 className="text-4xl font-medium text-bark">{title}</h1>
+      <h1 className="text-4xl font-medium text-black">{title}</h1>
     </div>
   </div>
 );
@@ -38,7 +38,7 @@ const SettingsComponent = () => {
 
 const Settings = () => {
   return (
-    <div className="bg-[#FFFFFF] rounded-tl-[40px] w-full h-full pl-10 pt-8 mt-0.5">
+    <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full pl-10 pt-8">
       <Header title={"Your Settings and Plan"} subtitle={"Settings"} />
       <SettingsComponent />
     </div>

@@ -55,7 +55,7 @@ export const DesktopSidebar = ({ className, children, ...props }) => {
   return (
     <motion.div
       className={cn(
-        "h-full px-4 py-4 hidden md:flex md:flex-col bg-light_vanilla w-[190px] flex-shrink-0 font-dm",
+        "h-full px-4 py-4 hidden md:flex md:flex-col bg-neutral-100 w-[190px] flex-shrink-0",
         className
       )}
       animate={{
@@ -81,7 +81,7 @@ export const MobileSidebar = ({ className, children, ...props }) => {
     >
       <div className="flex justify-end z-20 w-full">
         <IconMenu2
-          className="text-neutral-800 dark:text-neutral-200"
+          className="text-neutral-800"
           onClick={() => setOpen(!open)}
         />
       </div>
@@ -132,7 +132,7 @@ export const SidebarLink = ({ link, className, ...props }) => {
           display: animate ? (open ? "inline-block" : "none") : "inline-block",
           opacity: animate ? (open ? 1 : 0) : 1,
         }}
-        className="text-bark text-sm group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
+        className="group-hover/sidebar:translate-x-1 transition duration-150 whitespace-pre inline-block !p-0 !m-0"
       >
         {link.label}
       </motion.span>

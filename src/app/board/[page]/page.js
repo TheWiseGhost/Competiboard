@@ -29,9 +29,12 @@ const DropdownComponent = ({ params }) => {
   const capitalizedPage = page.charAt(0).toUpperCase() + page.slice(1);
 
   return (
-    <div className="font-dm pt-8 pb-6 rounded-tl-[40px] mt-1 mr-1 px-10 flex flex-col h-screen w-full bg-white justify-center items-center">
+    <div className="font-dm pt-8 pb-6 rounded-tl-[20px] border-l-[3px] border-black px-10 flex flex-col h-screen w-full bg-white justify-center items-center">
       <div className="flex flex-col space-y-2">
-        <h1 className="text-5xl font-medium text-center">{capitalizedPage}</h1>
+        <h1 className="text-5xl font-euclid font-semibold text-center">
+          {capitalizedPage}
+          <span className="text-6xl text-red-500">.</span>
+        </h1>
         <Dropdown page={page} />
       </div>
     </div>
@@ -44,43 +47,37 @@ export default function SidebarDemo({ params }) {
       label: "Dashboard",
       href: "/dashboard",
       icon: (
-        <IconBrandTabler className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconBrandTabler className="text-neutral-800 size-5 flex-shrink-0" />
       ),
     },
     {
       label: "View Board",
       href: "/board/live",
-      icon: (
-        <IconEye className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconEye className="text-neutral-800 size-5 flex-shrink-0" />,
     },
     {
       label: "Edit Display",
       href: "/board/display",
-      icon: (
-        <IconHammer className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconHammer className="text-neutral-800 size-5 flex-shrink-0" />,
     },
     {
       label: "Edit Data",
       href: "/board/data",
       icon: (
-        <IconReportAnalytics className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
+        <IconReportAnalytics className="text-neutral-800 size-5 flex-shrink-0" />
       ),
     },
     {
       label: "Settings",
       href: "/settings",
-      icon: (
-        <IconSettings className="text-coral dark:text-neutral-200 h-5 w-5 flex-shrink-0" />
-      ),
+      icon: <IconSettings className="text-neutral-800 size-5 flex-shrink-0" />,
     },
   ];
   const [open, setOpen] = useState(false);
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-light_vanilla dark:bg-neutral-800 w-full flex-1 border border-neutral-200 dark:border-neutral-700 overflow-hidden",
+        "rounded-md flex flex-col md:flex-row a w-full flex-1 overflow-hidden bg-neutral-100",
         "h-screen"
       )}
     >
@@ -88,7 +85,7 @@ export default function SidebarDemo({ params }) {
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 pl-3 pt-3 overflow-y-auto overflow-x-hidden">
             {open ? <Logo /> : <LogoIcon />}
-            <div className="mt-8 flex flex-col gap-2">
+            <div className="mt-8 flex flex-col gap-2 text-neutral-800 font-dm text-sm">
               {links.map((link, idx) => (
                 <SidebarLink key={idx} link={link} />
               ))}
@@ -109,11 +106,11 @@ export const Logo = () => {
       href="#"
       className="font-normal font-dm flex space-x-2 items-center text-sm py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-light_coral dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
+      <div className="h-5 w-6 bg-black dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-medium text-bark text-sm dark:text-white whitespace-pre"
+        className="font-medium text-black text-sm dark:text-white whitespace-pre"
       >
         Competiboard
       </motion.span>
@@ -126,7 +123,7 @@ export const LogoIcon = () => {
       href="#"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-light_coral dark:bg-white rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
+      <div className="h-5 w-6 bg-black rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
     </Link>
   );
 };

@@ -1,6 +1,6 @@
 const Reward = () => {
   return (
-    <div className="bg-coral/80 h-screen">
+    <div className="bg-coral/70 h-screen">
       <div className="h-1 bg-black w-full mb-10"></div>
       <div className="flex flex-row gap-12">
         {/* Left Side */}

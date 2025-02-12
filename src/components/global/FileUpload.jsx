@@ -65,7 +65,7 @@ export const FileUpload = ({ onChange, target }) => {
           onChange={(e) => handleFileChange(e.target.files[0])}
           className="hidden"
         />
-        <p className="relative text-center pb-3 z-20 text-lg font-dm font-medium text-rubarb dark:text-neutral-300">
+        <p className="relative text-center pb-3 z-20 text-lg font-dm font-medium text-coral/80 dark:text-neutral-300">
           Upload {target}
         </p>
         <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div>
@@ -134,10 +134,10 @@ export const FileUpload = ({ onChange, target }) => {
                   stiffness: 300,
                   damping: 20,
                 }}
-                initial={{ borderColor: "#C06E52" }}
-                animate={{ borderColor: isHovered ? "#43281C" : "#C06E52" }}
+                initial={{ borderColor: "#767575" }}
+                animate={{ borderColor: isHovered ? "#FF6C63" : "#767575" }}
                 className={cn(
-                  "relative group-hover/file:shadow-2xl z-40 border border-dashed dark:bg-neutral-900 flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
+                  "relative group-hover/file:shadow-2xl z-40 border border-dashed  flex items-center justify-center h-32 mt-4 w-full max-w-[8rem] mx-auto rounded-md",
                   "shadow-[0px_10px_50px_rgba(0,0,0,0.1)]"
                 )}
               >

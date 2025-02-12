@@ -46,7 +46,7 @@ const Dropdown = ({ page }) => {
       <motion.div animate={open ? "open" : "closed"} className="relative">
         <button
           onClick={() => setOpen((pv) => !pv)}
-          className="flex items-center gap-2 px-4 py-4 rounded-md text-gray-50 bg-coral hover:bg-coral/80 transition-colors duration-300"
+          className="flex items-center gap-2 px-4 py-4 rounded-md text-gray-50 bg-neutral-800 hover:bg-black transition-colors duration-300"
         >
           <span className="font-medium text-sm">Choose a Board</span>
           <motion.span variants={iconVariants}>
@@ -91,7 +91,7 @@ const Option = ({ text, page, id }) => {
     <motion.li
       variants={itemVariants}
       onClick={handleClick}
-      className="flex items-center gap-2 w-full px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-light_vanilla text-slate-700 hover:text-black transition-colors cursor-pointer"
+      className="flex items-center gap-2 w-full px-3 py-2 text-sm font-medium whitespace-nowrap rounded-md hover:bg-light_coral/80 text-slate-700 hover:text-black transition-colors cursor-pointer"
     >
       <span>{text}</span>
     </motion.li>

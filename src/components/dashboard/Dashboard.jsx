@@ -19,20 +19,23 @@ import { useToast } from "../global/Use-Toast";
 
 const CircleText = ({ text }) => (
   <div className="flex flex-row items-center">
-    <div className="bg-light_vanilla p-2 rounded-full mr-2"></div>
-    <div className="text-vanilla text-sm">{text}</div>
+    <div className="bg-neutral-300 p-2 rounded-full mr-2"></div>
+    <div className="text-neutral-400 text-sm">{text}</div>
   </div>
 );
 
 const Header = ({ title, subtitle }) => (
-  <div className="flex flex-col space-y-3 font-dm">
+  <div className="flex flex-col space-y-3 font-dm -mt-1">
     <div className="flex items-center gap-2">
       <CircleText text="Competiboard" />
       <span>/</span>
-      <span className="text-bark text-sm">{subtitle}</span>
+      <span className="text-black text-sm">{subtitle}</span>
     </div>
     <div>
-      <h1 className="text-4xl font-medium text-bark">{title}</h1>
+      <h1 className="text-5xl font-semibold font-euclid text-black">
+        {title}
+        <span className="text-6xl text-red-500">.</span>
+      </h1>
     </div>
   </div>
 );
@@ -47,7 +50,7 @@ const GridItem = ({ title, thumbnail }) => (
           alt="thumbnail"
         />
       ) : null}
-      <div className="text-xl font-dm font-medium text-bark w-full text-center pr-2 pt-2">
+      <div className="text-xl font-dm font-medium text-black w-full text-center pr-2 pt-2">
         {title}
       </div>
     </div>
@@ -165,23 +168,24 @@ const DashboardComponent = () => {
         </div>
       ) : (
         <div className="w-full h-full flex flex-col justify-center items-center text-center space-y-4">
-          <p className="font-dm text-rubarb">
+          <p className="font-dm text-gray-700">
             Create Your First Board to get started with Competiboard
           </p>
         </div>
       )}
       <Drawer>
         <DrawerTrigger>
-          <span className="bg-coral font-dm text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
+          <span className="bg-light_coral font-dm text-white hover:bg-light_coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
             Create Board
           </span>
         </DrawerTrigger>
         <DrawerContent>
           <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
-            <div className="mx-auto h-2 rounded-2xl bg-light_vanilla w-1/5"></div>
+            <div className="mx-auto h-2 rounded-2xl bg-gray-200 w-1/5"></div>
             <DrawerHeader>
-              <DrawerTitle className="font-dm text-4xl text-coral pt-6">
+              <DrawerTitle className="font-euclid font-semibold text-4xl text-black pt-6">
                 Create a New Board
+                <span className="text-red-500 text-5xl">.</span>
               </DrawerTitle>
             </DrawerHeader>
             <div className="p-4">
@@ -191,7 +195,7 @@ const DashboardComponent = () => {
                   value={title}
                   onChange={handleTitleChange}
                   placeholder="Enter title"
-                  className="border w-full border-vanilla rounded-lg p-3 text-gray-700 active:border-coral"
+                  className="border w-full border-gray-400 rounded-lg p-3 text-gray-700 active:border-light_coral"
                   maxLength="100"
                 ></input>
               </div>
@@ -206,7 +210,7 @@ const DashboardComponent = () => {
               <DrawerClose>
                 <span
                   onClick={handleUpload}
-                  className="bg-coral font-dm w-4/5 mx-auto text-white hover:bg-coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none"
+                  className="bg-light_coral font-dm w-4/5 mx-auto text-white hover:bg-light_coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none"
                 >
                   Create
                 </span>
@@ -220,7 +224,7 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <div className="bg-[#FFFFFF] rounded-tl-[40px] w-full h-full pl-10 pt-8 mt-0.5">
+  <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full pl-10 pt-8">
     <Header title={"Your Competiboards"} subtitle={"Dashboard"} />
     <DashboardComponent />
   </div>
