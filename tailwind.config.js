@@ -32,7 +32,7 @@ module.exports = {
         light_vanilla: "#FBF2C0",
         coral: "#FF4438",
         light_coral: "#FF6C63",
-        rubarb: "#C06E52",
+        gold: "#FFB22F",
       },
       keyframes: {
         "accordion-down": {

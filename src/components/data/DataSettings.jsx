@@ -160,31 +160,31 @@ const DataSettings = ({ id }) => {
   return (
     <div className="bg-white rounded-lg pt-16 font-dm">
       <h2 className="text-3xl font-medium">Board Data Settings</h2>
-      <div className="mt-4 mb-8 bg-light_coral/30 w-80 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       {/* Filter Settings */}
       <div className="grid grid-cols-2 pr-32">
         <div>
           <h3 className="text-2xl font-medium mb-4">Filter Settings</h3>
           <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-coral" />
+            <div className="rounded-full size-2 bg-gold" />
             <label className="block font-medium pl-2 pr-4">
               Filter In Field:
             </label>
             <input
-              className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
               type="text"
               value={filterFields.filterIn}
               onChange={(e) => handleFilterChange("filterIn", e.target.value)}
             />
           </div>
           <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-coral" />
+            <div className="rounded-full size-2 bg-gold" />
             <label className="block font-medium pl-2 pr-4">
               Filter Out Field:
             </label>
             <input
-              className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
               type="text"
               value={filterFields.filterOut}
               onChange={(e) => handleFilterChange("filterOut", e.target.value)}
@@ -198,30 +198,30 @@ const DataSettings = ({ id }) => {
             Date Settings
           </h3>
           <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-coral" />
+            <div className="rounded-full size-2 bg-gold" />
             <label className="block font-medium pl-2 pr-4">Date Field:</label>
             <input
-              className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
               type="text"
               value={dateSettings.dateField}
               onChange={(e) => handleDateFieldChange(e.target.value)}
             />
           </div>
           <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-coral" />
+            <div className="rounded-full size-2 bg-gold" />
             <label className="block font-medium pl-2 pr-4">Date Format:</label>
             <input
-              className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
               type="text"
               value={dateSettings.dateFormat}
               onChange={(e) => handleDateFormatChange(e.target.value)}
             />
           </div>
           <div className="flex flex-row items-center mt-4 mb-2">
-            <div className="rounded-full size-2 bg-coral" />
+            <div className="rounded-full size-2 bg-gold" />
             <label className="block font-medium pl-2">
               Include Tabs:
-              <span className="text-base text-gray-700 ml-4">
+              <span className="text-base text-neutral-700 ml-4">
                 (Under development)
               </span>
             </label>
@@ -234,7 +234,7 @@ const DataSettings = ({ id }) => {
                 className={`px-4 py-1 rounded-md border ${
                   dateSettings.selectedTabs.includes(tab)
                     ? "border-coral"
-                    : "bg-light_vanilla border-light_vanilla "
+                    : "bg-neutral-100 border-neutral-100 "
                 }`}
                 onClick={() => toggleTab(tab)}
               >
@@ -255,7 +255,7 @@ const DataSettings = ({ id }) => {
               className={`px-6 py-2 rounded-md ${
                 selectedMethod === method
                   ? "border-coral border-2"
-                  : "bg-light_vanilla"
+                  : "bg-neutral-100"
               }`}
               onClick={() => setSelectedMethod(method)}
             >
@@ -273,7 +273,7 @@ const DataSettings = ({ id }) => {
           </p>
           <input
             type="text"
-            className="p-3 rounded-md bg-light_vanilla focus:bg-white"
+            className="p-3 rounded-md bg-neutral-100 focus:bg-white"
             placeholder="Sum field"
             value={sumFields.sumField}
             onChange={(e) => handleSumFieldChange("sumField", e.target.value)}
@@ -283,7 +283,7 @@ const DataSettings = ({ id }) => {
           </p>
           <input
             type="text"
-            className="p-3 rounded-md bg-light_vanilla focus:bg-white"
+            className="p-3 rounded-md bg-neutral-100 focus:bg-white"
             placeholder="Display field"
             value={sumFields.displayField}
             onChange={(e) =>
@@ -298,7 +298,7 @@ const DataSettings = ({ id }) => {
           </p>
           <input
             type="text"
-            className="p-3 rounded-md bg-light_vanilla focus:bg-white"
+            className="p-3 rounded-md bg-neutral-100 focus:bg-white"
             placeholder="Value field"
             value={classicFields.valueField}
             onChange={(e) =>
@@ -310,7 +310,7 @@ const DataSettings = ({ id }) => {
           </p>
           <input
             type="text"
-            className="p-3 rounded-md bg-light_vanilla focus:bg-white"
+            className="p-3 rounded-md bg-neutral-100 focus:bg-white"
             placeholder="Display field"
             value={classicFields.displayField}
             onChange={(e) =>

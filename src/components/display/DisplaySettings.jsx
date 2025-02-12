@@ -102,7 +102,7 @@ const DisplaySettings = ({ id }) => {
     <div className="bg-white rounded-lg pt-12 font-dm w-4/5">
       <div>
         <h2 className="text-3xl font-medium mb-4">Display Settings</h2>
-        <div className="mb-6 bg-light_coral/30 w-80 h-0.5" />
+        <div className="mb-6 bg-light_coral/70 w-96 h-0.5" />
 
         <div className="grid grid-cols-2">
           {/* Colors Section */}
@@ -121,12 +121,12 @@ const DisplaySettings = ({ id }) => {
               "nameField",
             ].map((field) => (
               <div key={field} className="flex items-center mt-4">
-                <div className="rounded-full size-2 bg-coral" />
+                <div className="rounded-full size-2 bg-gold" />
                 <label className="block font-medium pl-2 pr-4 capitalize">
                   {field.replace(/([A-Z])/g, " $1")}:
                 </label>
                 <input
-                  className="w-1/3 p-2 rounded-md bg-light_vanilla focus:bg-white"
+                  className="w-1/3 p-2 rounded-md bg-neutral-100 focus:bg-white"
                   type="text"
                   value={settings[field]}
                   onChange={(e) => handleChange(field, e.target.value)}
@@ -140,12 +140,12 @@ const DisplaySettings = ({ id }) => {
             <h3 className="text-2xl font-medium mb-4">Text:</h3>
             {["title", "subtitle", "rankingTitle", "nameText"].map((field) => (
               <div key={field} className="flex items-center mt-4">
-                <div className="rounded-full size-2 bg-coral" />
+                <div className="rounded-full size-2 bg-gold" />
                 <label className="block font-medium pl-2 pr-4 capitalize">
                   {field.replace(/([A-Z])/g, " $1")}:
                 </label>
                 <input
-                  className="w-1/2 p-2 rounded-md bg-light_vanilla focus:bg-white"
+                  className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
                   type="text"
                   value={settings[field]}
                   onChange={(e) => handleChange(field, e.target.value)}

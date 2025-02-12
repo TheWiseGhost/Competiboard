@@ -6,7 +6,7 @@ const UserInfoForm = ({ email, name, plan }) => {
       {/* Email Field */}
       <div className="">
         <div className="text-lg font-medium text-gray-800 mb-2">Email</div>
-        <div className="border border-vanilla rounded-lg p-3 text-gray-700">
+        <div className="border border-neutral-300 rounded-lg p-3 text-gray-700">
           {email}
         </div>
       </div>
@@ -14,7 +14,7 @@ const UserInfoForm = ({ email, name, plan }) => {
       {/* Name Field */}
       <div className="">
         <div className="text-lg font-medium text-gray-800 mb-2">Name</div>
-        <div className="border border-vanilla rounded-lg p-3 text-gray-700">
+        <div className="border border-neutral-300 rounded-lg p-3 text-gray-700">
           {name}
         </div>
       </div>
@@ -22,9 +22,9 @@ const UserInfoForm = ({ email, name, plan }) => {
       {/* Plan Field */}
       <div className="pb-4">
         <div className="text-lg font-medium text-gray-800 mb-2">Plan</div>
-        <div className="border border-vanilla rounded-lg p-3 text-gray-700">
+        <div className="border border-neutral-300 rounded-lg p-3 text-gray-700">
           <div className="flex flex-row items-center space-x-3">
-            <div className="w-4 h-4 rounded-full bg-coral"></div>
+            <div className="w-4 h-4 rounded-full bg-light_coral"></div>
             <span>{plan}</span>
           </div>
         </div>
@@ -35,7 +35,7 @@ const UserInfoForm = ({ email, name, plan }) => {
         onClick={() => {
           window.open("/checkout");
         }}
-        className="w-1/3 bg-coral text-white hover:bg-coral/80 py-3 text-base rounded-lg transition duration-300 font-semibold"
+        className="w-1/3 bg-light_coral text-white hover:bg-light_coral/80 py-3 text-base rounded-lg transition duration-300 font-semibold"
       >
         Upgrade
       </button>

@@ -121,12 +121,12 @@ const AddDataSource = ({ id }) => {
   const renderAPIInputs = () => {
     return Object.keys(inputValues[selectedSource]).map((field) => (
       <div key={field} className="flex flex-row items-center mt-4">
-        <div className="rounded-full size-2 bg-coral" />
+        <div className="rounded-full size-2 bg-gold" />
         <label className="block font-medium pl-2 pr-4">
           {field.charAt(0).toUpperCase() + field.slice(1)}:
         </label>
         <input
-          className="w-1/4 p-2 rounded-md bg-light_vanilla focus:bg-white"
+          className="w-1/4 p-2 rounded-md bg-neutral-100 focus:bg-white"
           type="text"
           name={field}
           value={inputValues[selectedSource][field]}
@@ -139,7 +139,7 @@ const AddDataSource = ({ id }) => {
   return (
     <div className="bg-white rounded-lg font-dm pt-12">
       <h2 className="text-3xl font-medium">Add Data Source</h2>
-      <div className="mt-4 mb-8 bg-light_coral/30 w-80 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       <div className="mt-4 flex flex-row items-center space-x-4">
         <p className="font-medium">Source:</p>
@@ -151,7 +151,7 @@ const AddDataSource = ({ id }) => {
               className={`px-6 py-2 rounded-md ${
                 selectedSource === source
                   ? "border-coral border-2"
-                  : "bg-light_vanilla"
+                  : "bg-neutral-100"
               }`}
             >
               {source}

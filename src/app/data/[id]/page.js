@@ -20,6 +20,9 @@ import { cn } from "@/lib/utils";
 import EditData from "@/components/data/EditData";
 
 export default function SidebarDemo({ params }) {
+  const unwrappedParams = React.use(params);
+  const id = unwrappedParams.id;
+
   const links = [
     {
       label: "Dashboard",
@@ -64,7 +67,7 @@ export default function SidebarDemo({ params }) {
           <SidebarBody className="justify-between gap-10">
             <div className="flex flex-col flex-1 pl-3 pt-3 overflow-y-auto overflow-x-hidden">
               {open ? <Logo /> : <LogoIcon />}
-              <div className="mt-8 flex flex-col gap-2 text-neutral-800 font-dm text-sm">
+              <div className="mt-8 flex flex-col gap-3 text-neutral-800 font-dm text-sm">
                 {links.map((link, idx) => (
                   <SidebarLink key={idx} link={link} />
                 ))}
@@ -75,7 +78,7 @@ export default function SidebarDemo({ params }) {
             </div>
           </SidebarBody>
         </Sidebar>
-        <EditData />
+        <EditData id={id} />
       </div>
       <div className="flex flex-col md:hidden bg-gray-100 min-h-screen items-center justify-center text-center">
         <img src="CompetiboardLogo.png" className="w-1/3" />
@@ -95,11 +98,11 @@ export const Logo = () => {
       href="#"
       className="font-normal font-dm flex space-x-2 items-center text-sm py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-black rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
+      <img src="/CompetiboardLogo.png" className="-ml-0.5 size-7" />
       <motion.span
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        className="font-medium font-euclid text-neutral-800 text-sm blackspace-pre"
+        className="font-medium font-euclid text-neutral-800 text-sm blackspace-pre mt-0.5"
       >
         Competiboard
       </motion.span>
@@ -112,7 +115,8 @@ export const LogoIcon = () => {
       href="#"
       className="font-normal flex space-x-2 items-center text-sm text-neutral-800 py-1 relative z-20"
     >
-      <div className="h-5 w-6 bg-black rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div>
+      {/* <div className="h-5 w-6 bg-black rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0"></div> */}
+      <img src="/CompetiboardLogo.png" className="-ml-0.5 size-7" />
     </Link>
   );
 };

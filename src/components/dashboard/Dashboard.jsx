@@ -19,8 +19,8 @@ import { useToast } from "../global/Use-Toast";
 
 const CircleText = ({ text }) => (
   <div className="flex flex-row items-center">
-    <div className="bg-neutral-300 p-2 rounded-full mr-2"></div>
-    <div className="text-neutral-400 text-sm">{text}</div>
+    <div className="bg-gold p-2 rounded-full mr-2"></div>
+    <div className="text-amber-950 text-sm">{text}</div>
   </div>
 );
 
@@ -29,7 +29,7 @@ const Header = ({ title, subtitle }) => (
     <div className="flex items-center gap-2">
       <CircleText text="Competiboard" />
       <span>/</span>
-      <span className="text-black text-sm">{subtitle}</span>
+      <span className="text-black font-dm text-sm">{subtitle}</span>
     </div>
     <div>
       <h1 className="text-5xl font-semibold font-euclid text-black">
@@ -168,7 +168,7 @@ const DashboardComponent = () => {
         </div>
       ) : (
         <div className="w-full h-full flex flex-col justify-center items-center text-center space-y-4">
-          <p className="font-dm text-gray-700">
+          <p className="font-dm text-neutral-700">
             Create Your First Board to get started with Competiboard
           </p>
         </div>
@@ -181,7 +181,7 @@ const DashboardComponent = () => {
         </DrawerTrigger>
         <DrawerContent>
           <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
-            <div className="mx-auto h-2 rounded-2xl bg-gray-200 w-1/5"></div>
+            <div className="mx-auto h-2 rounded-2xl bg-neutral-200 w-1/5"></div>
             <DrawerHeader>
               <DrawerTitle className="font-euclid font-semibold text-4xl text-black pt-6">
                 Create a New Board
@@ -195,7 +195,7 @@ const DashboardComponent = () => {
                   value={title}
                   onChange={handleTitleChange}
                   placeholder="Enter title"
-                  className="border w-full border-gray-400 rounded-lg p-3 text-gray-700 active:border-light_coral"
+                  className="border w-full border-neutral-400 rounded-lg p-3 text-neutral-700 active:border-light_coral"
                   maxLength="100"
                 ></input>
               </div>
