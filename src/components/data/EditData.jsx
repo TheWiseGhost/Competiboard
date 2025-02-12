@@ -27,7 +27,7 @@ const Header = ({ title, subtitle }) => (
 
 const EditData = ({ id }) => {
   return (
-    <div className="flex flex-grow flex-col w-full min-h-screen pb-20 bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black h-full pl-10 pt-8 overflow-y-auto">
+    <div className="flex flex-grow flex-col w-full min-h-screen pb-20 bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black h-full pl-12 pt-8 overflow-y-auto">
       <Header title={"Edit Your Board's Data"} subtitle={"Data"} />
       <AddDataSource id={id} />
       <DataSettings id={id} />

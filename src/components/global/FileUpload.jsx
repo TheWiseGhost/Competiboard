@@ -65,7 +65,7 @@ export const FileUpload = ({ onChange, target }) => {
           onChange={(e) => handleFileChange(e.target.files[0])}
           className="hidden"
         />
-        <p className="relative text-center pb-3 z-20 text-lg font-dm font-medium text-coral/80 dark:text-neutral-300">
+        <p className="relative text-center pb-3 z-20 text-lg font-dm font-medium text-black/80 dark:text-neutral-300">
           Upload {target}
         </p>
         <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]"></div>

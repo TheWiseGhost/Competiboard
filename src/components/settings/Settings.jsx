@@ -41,7 +41,7 @@ const SettingsComponent = () => {
 
 const Settings = () => {
   return (
-    <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full pl-10 pt-8">
+    <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full pl-12 pt-8">
       <Header title={"Your Settings and Plan"} subtitle={"Settings"} />
       <SettingsComponent />
     </div>

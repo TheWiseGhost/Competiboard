@@ -16,6 +16,7 @@ import {
 import { FileUpload } from "@/components/global/FileUpload";
 import { ToastAction } from "../global/Toast";
 import { useToast } from "../global/Use-Toast";
+import { motion } from "framer-motion";
 
 const CircleText = ({ text }) => (
   <div className="flex flex-row items-center">
@@ -40,22 +41,58 @@ const Header = ({ title, subtitle }) => (
   </div>
 );
 
-const GridItem = ({ title, thumbnail }) => (
-  <div className="flex flex-col space-y-2 px-4 items-start">
-    <div className="rounded-lg overflow-hidden flex flex-col justify-center items-center h-64 w-fit">
-      {thumbnail ? (
-        <img
-          src={thumbnail}
-          className="w-full h-3/4 object-contain px-4"
-          alt="thumbnail"
-        />
-      ) : null}
-      <div className="text-xl font-dm font-medium text-black w-full text-center pr-2 pt-2">
-        {title}
+const GridItem = ({ id, title, thumbnail }) => {
+  const container = {
+    initial: {
+      borderColor: "#404040", // neutral-700
+    },
+    hover: {
+      borderColor: "#000000",
+      transition: { duration: 0.2 },
+    },
+  };
+
+  const circles = {
+    initial: {
+      backgroundColor: "#FFB22F", // gold
+    },
+    hover: {
+      backgroundColor: "#FF4438", // red
+      transition: { duration: 0.2 },
+    },
+  };
+
+  return (
+    <motion.div
+      initial="initial"
+      whileHover="hover"
+      variants={container}
+      className="cursor-pointer flex flex-col space-y-2 items-start border-[3px] rounded-2xl justify-center place-items-center"
+    >
+      <div
+        onClick={() => {
+          window.open(`http://localhost:3000/live/${id}`);
+        }}
+        className="rounded-lg overflow-hidden flex flex-col justify-center items-center h-64 w-fit mx-auto"
+      >
+        {thumbnail ? (
+          <img
+            src={thumbnail}
+            className="w-full h-2/3 object-contain px-4"
+            alt="thumbnail"
+          />
+        ) : null}
+        <div className="text-xl font-euclid font-medium text-black w-full text-center items-center pt-3">
+          <div className="flex flex-row justify-center text-amber-950 items-center">
+            <motion.div className="p-1 rounded-full mr-2" variants={circles} />
+            {title}
+            <motion.div className="p-1 rounded-full ml-2" variants={circles} />
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-);
+    </motion.div>
+  );
+};
 
 const DashboardComponent = () => {
   const [boards, setBoards] = useState(null); // Initialize as null to check loading state
@@ -79,6 +116,17 @@ const DashboardComponent = () => {
       return;
     }
 
+    // Check for invalid characters in title
+    const invalidChars = /[^a-zA-Z0-9-_]/;
+    if (invalidChars.test(title)) {
+      toast({
+        title: "Invalid Title",
+        description:
+          "Title contains invalid characters or spaces. Only letters, numbers, hyphens, and underscores are allowed.",
+      });
+      return;
+    }
+
     try {
       const formData = new FormData();
       formData.append("file", file);
@@ -92,27 +140,40 @@ const DashboardComponent = () => {
         body: formData,
       });
 
-      if (!response.ok) {
+      const data = await response.json();
+
+      if (response.ok) {
+        if (data.warning) {
+          toast({
+            title: `Warning: Existing Title`,
+            description:
+              "Someone owns a board with this title already exists. Choose a different title",
+          });
+        } else {
+          toast({
+            title: `Board Added: ${title}`,
+            description: "Refresh the page to see it",
+            action: (
+              <ToastAction
+                onClick={() => {
+                  window.location.href = "/board/data";
+                }}
+                altText="Go to Edit Data"
+              >
+                Edit Data
+              </ToastAction>
+            ),
+          });
+        }
+      } else {
         throw new Error("Error uploading file.");
       }
     } catch (error) {
-      // console.error("Error uploading file:", error);
-      // alert("Error uploading file. Please try again.");
-    } finally {
       toast({
-        title: `Board Added: ${title}`,
-        description: "Refresh the page to see it",
-        action: (
-          <ToastAction
-            onClick={() => {
-              window.location.href = "/board/data";
-            }}
-            altText="Go to Edit Data"
-          >
-            Edit Data
-          </ToastAction>
-        ),
+        title: "Error",
+        description: "Error uploading file. Please try again.",
       });
+    } finally {
       setFile(null);
       setTitle("");
     }
@@ -157,10 +218,11 @@ const DashboardComponent = () => {
   return (
     <>
       {boards.length > 0 ? (
-        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-6 items-start pb-8">
+        <div className="grid grid-cols-3 gap-x-16 gap-y-8 w-full pt-8 items-start pb-8">
           {boards.map((board) => (
             <GridItem
               key={board.id}
+              id={board.id}
               title={board.title}
               thumbnail={board.thumbnail}
             />
@@ -183,21 +245,26 @@ const DashboardComponent = () => {
           <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
             <div className="mx-auto h-2 rounded-2xl bg-neutral-200 w-1/5"></div>
             <DrawerHeader>
-              <DrawerTitle className="font-euclid font-semibold text-4xl text-black pt-6">
+              <DrawerTitle className="font-euclid font-semibold text-4xl text-black pt-4">
                 Create a New Board
                 <span className="text-red-500 text-5xl">.</span>
               </DrawerTitle>
             </DrawerHeader>
             <div className="p-4">
               <div className="pb-2 font-dm">
-                <input
-                  type="text"
-                  value={title}
-                  onChange={handleTitleChange}
-                  placeholder="Enter title"
-                  className="border w-full border-neutral-400 rounded-lg p-3 text-neutral-700 active:border-light_coral"
-                  maxLength="100"
-                ></input>
+                <div className="flex items-center pr-2 py-2">
+                  <span className="text-neutral-800 font-inter font-semibold pr-2">
+                    competiboard.com/
+                  </span>
+                  <input
+                    type="text"
+                    value={title}
+                    onChange={handleTitleChange}
+                    placeholder="Enter title"
+                    className="border w-full border-neutral-400 rounded-lg p-3 text-neutral-700 active:border-light_coral"
+                    maxLength="100"
+                  ></input>
+                </div>
               </div>
               <div className="pb-4">
                 <FileUpload
@@ -224,7 +291,7 @@ const DashboardComponent = () => {
 };
 
 const Dashboard = () => (
-  <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full pl-10 pt-8">
+  <div className="bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black w-full h-full px-12 pt-8 overflow-y-auto pb-12">
     <Header title={"Your Competiboards"} subtitle={"Dashboard"} />
     <DashboardComponent />
   </div>
