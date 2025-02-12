@@ -3,6 +3,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "@/components/global/Toaster";
 import { GrammarlyCleanup } from "@/components/global/GrammerlyCleanup";
+import "google-fonts-complete";
 
 const font = DM_Sans({ subsets: ["latin"], variable: "--font-dm" });
 const inter = Inter({
@@ -37,6 +38,10 @@ export default function RootLayout({ children }) {
       <html lang="en">
         <head>
           <link rel="icon" type="image/png" href="CompetiboardLogo.png" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Archivo&family=Bebas+Neue&family=Oswald&family=Quicksand&family=Work+Sans&family=Nunito&display=swap"
+            rel="stylesheet"
+          />
         </head>
         <body
           className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable}`}

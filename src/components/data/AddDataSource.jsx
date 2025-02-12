@@ -139,7 +139,7 @@ const AddDataSource = ({ id }) => {
   return (
     <div className="bg-white rounded-lg font-dm pt-12">
       <h2 className="text-3xl font-medium">Add Data Source</h2>
-      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_light_coral/70 w-96 h-0.5" />
 
       <div className="mt-4 flex flex-row items-center space-x-4">
         <p className="font-medium">Source:</p>
@@ -150,7 +150,7 @@ const AddDataSource = ({ id }) => {
               onClick={() => setSelectedSource(source)}
               className={`px-6 py-2 rounded-md ${
                 selectedSource === source
-                  ? "border-coral border-2"
+                  ? "border-light_coral border-2"
                   : "bg-neutral-100"
               }`}
             >
@@ -167,7 +167,7 @@ const AddDataSource = ({ id }) => {
 
       <button
         onClick={handleSave}
-        className="mt-10 px-6 py-2 bg-coral text-white rounded-md hover:bg-coral/80 transition-colors"
+        className="mt-10 px-6 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
       >
         Save Source
       </button>

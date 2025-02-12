@@ -6,6 +6,7 @@ import { ToastAction } from "../global/Toast";
 import { useToast } from "../global/Use-Toast";
 
 const DisplaySettings = ({ id }) => {
+  // State for all settings, including fonts
   const [settings, setSettings] = useState({
     borders: "",
     boardBackground: "",
@@ -20,12 +21,19 @@ const DisplaySettings = ({ id }) => {
     title: "",
     subtitle: "",
     rankingTitle: "",
-    nameText: "",
+    nameTitle: "",
+    titleFont: "",
+    subtitleFont: "",
+    boardRankTitleFont: "",
+    boardRankFont: "",
+    boardNameTitleFont: "",
+    boardNameFont: "",
   });
 
   const { user } = useUser();
   const { toast } = useToast();
 
+  // Fetch board details on component mount or when user/id changes
   useEffect(() => {
     const fetchBoardDetails = async () => {
       try {
@@ -40,29 +48,29 @@ const DisplaySettings = ({ id }) => {
           }
         );
 
-        if (!response.ok) throw new Error("Failed to fetch data details");
+        if (!response.ok) throw new Error("Failed to fetch board details");
 
         const result = await response.json();
-        console.log(result.data);
-
         if (result.data) {
           setSettings((prev) => ({
             ...prev,
-            ...result.data.display, // Only update fields that exist in response
+            ...result.data.display, // Update fields from the response
           }));
         }
       } catch (error) {
-        console.error("Error fetching data details:", error);
+        console.error("Error fetching board details:", error);
       }
     };
 
     if (id && user?.id) fetchBoardDetails();
   }, [id, user]);
 
+  // Handle input changes
   const handleChange = (field, value) => {
     setSettings((prev) => ({ ...prev, [field]: value }));
   };
 
+  // Save settings to the backend
   const handleSave = async () => {
     const dataToSend = {
       settings: settings,
@@ -82,11 +90,11 @@ const DisplaySettings = ({ id }) => {
         }
       );
 
-      if (!response.ok) throw new Error("Network response was not ok");
+      if (!response.ok) throw new Error("Failed to save settings");
 
       toast({
-        title: `Board Updated`,
-        description: "Good Progress =)",
+        title: "Board Updated",
+        description: "Your display settings have been saved!",
         action: (
           <ToastAction onClick={() => {}} altText="Close">
             Close
@@ -94,7 +102,7 @@ const DisplaySettings = ({ id }) => {
         ),
       });
     } catch (error) {
-      console.error("Error saving data:", error);
+      console.error("Error saving settings:", error);
     }
   };
 
@@ -104,10 +112,10 @@ const DisplaySettings = ({ id }) => {
         <h2 className="text-3xl font-medium mb-4">Display Settings</h2>
         <div className="mb-6 bg-light_coral/70 w-96 h-0.5" />
 
-        <div className="grid grid-cols-2">
+        <div className="grid grid-cols-2 gap-8">
           {/* Colors Section */}
           <div>
-            <h3 className="text-2xl font-medium mb-4">Colors:</h3>
+            <h3 className="text-2xl font-medium mb-4">Colors</h3>
             {[
               "borders",
               "boardBackground",
@@ -135,10 +143,10 @@ const DisplaySettings = ({ id }) => {
             ))}
           </div>
 
-          {/* Text Section */}
+          {/* Text and Fonts Section */}
           <div>
-            <h3 className="text-2xl font-medium mb-4">Text:</h3>
-            {["title", "subtitle", "rankingTitle", "nameText"].map((field) => (
+            <h3 className="text-2xl font-medium mb-4">Text</h3>
+            {["title", "subtitle", "rankingTitle", "nameTitle"].map((field) => (
               <div key={field} className="flex items-center mt-4">
                 <div className="rounded-full size-2 bg-gold" />
                 <label className="block font-medium pl-2 pr-4 capitalize">
@@ -152,15 +160,46 @@ const DisplaySettings = ({ id }) => {
                 />
               </div>
             ))}
+
+            {/* Fonts Section */}
+            <h4 className="text-2xl font-medium mt-8 mb-4">Fonts</h4>
+            {[
+              "titleFont",
+              "subtitleFont",
+              "boardRankTitleFont",
+              "boardRankFont",
+              "boardNameTitleFont",
+              "boardNameFont",
+            ].map((field) => (
+              <div key={field} className="flex items-center mt-4">
+                <div className="rounded-full size-2 bg-gold" />
+                <label className="block font-medium pl-2 pr-4 capitalize">
+                  {field
+                    .replace(/([A-Z])/g, " $1")
+                    .replace("board ", "")
+                    .trim()}
+                  :
+                </label>
+                <input
+                  className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
+                  type="text"
+                  placeholder="e.g., 'Roboto', sans-serif"
+                  value={settings[field]}
+                  onChange={(e) => handleChange(field, e.target.value)}
+                />
+              </div>
+            ))}
           </div>
         </div>
+
+        {/* Save Button */}
+        <button
+          onClick={handleSave}
+          className="mt-10 px-6 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
+        >
+          Save Display
+        </button>
       </div>
-      <button
-        onClick={handleSave}
-        className="mt-10 px-6 py-2 bg-coral text-white rounded-md hover:bg-coral/80 transition-colors"
-      >
-        Save Display
-      </button>
     </div>
   );
 };

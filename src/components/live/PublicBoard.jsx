@@ -23,7 +23,13 @@ const PublicBoard = ({ board }) => {
     title: "",
     subtitle: "",
     rankingTitle: "",
-    nameText: "",
+    nameTitle: "",
+    titleFont: "",
+    subtitleFont: "",
+    boardRankTitleFont: "",
+    boardRankFont: "",
+    boardNameTitleFont: "",
+    boardNameFont: "",
   });
 
   useEffect(() => {
@@ -43,6 +49,8 @@ const PublicBoard = ({ board }) => {
         const result = await response.json();
         if (result.data) {
           setSettings((prev) => ({ ...prev, ...result.data.display }));
+          console.log("All settings:", result.data.display);
+          console.log("Font family value:", result.data.display.boardNameFont);
         }
       } catch (error) {
         console.error("Error fetching board details:", error);
@@ -96,12 +104,10 @@ const PublicBoard = ({ board }) => {
       }
     };
 
-    if (board) {
-      fetchBoardDetails();
-      fetchLeaderboard();
-      fetchLast30DaysLeaderboard();
-    }
-  }, [board]);
+    fetchBoardDetails();
+    fetchLeaderboard();
+    fetchLast30DaysLeaderboard();
+  }, []);
 
   if (loading)
     return (
@@ -112,20 +118,26 @@ const PublicBoard = ({ board }) => {
 
   return (
     <div
-      className="w-full font-dm px-20 min-h-screen pt-12 pb-20"
+      className="w-full px-20 min-h-screen pt-12 pb-20"
       style={{
         backgroundColor: settings.pageBackground,
       }}
     >
       <h2
-        className="text-5xl font-dm font-bold mb-4 text-left"
-        style={{ color: settings.titleColor }}
+        className="text-5xl font-bold mb-4 text-left"
+        style={{
+          color: settings.titleColor,
+          fontFamily: settings.titleFont,
+        }}
       >
         {settings.title}
       </h2>
       <p
         className="text-left text-lg mb-4"
-        style={{ color: settings.subtitleColor }}
+        style={{
+          color: settings.subtitleColor,
+          fontFamily: settings.subtitleFont,
+        }}
       >
         {settings.subtitle}
       </p>
@@ -148,16 +160,26 @@ const PublicBoard = ({ board }) => {
             <table className="w-full border-none">
               <thead>
                 <tr
-                  className="border-none"
+                  className="border-none uppercase"
                   style={{ color: settings.tableHeaders }}
                 >
                   <th className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm">
                     Rank
                   </th>
-                  <th className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm">
-                    {settings.nameText}
+                  <th
+                    style={{
+                      fontFamily: settings.boardNameTitleFont,
+                    }}
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm"
+                  >
+                    {settings.nameTitle}
                   </th>
-                  <th className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm">
+                  <th
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm"
+                    style={{
+                      fontFamily: settings.boardRankTitleFont,
+                    }}
+                  >
                     {settings.rankingTitle}
                   </th>
                 </tr>
@@ -179,13 +201,19 @@ const PublicBoard = ({ board }) => {
                     </td>
                     <td
                       className="py-4 px-4 w-1/2 text-xl font-afc font-semibold"
-                      style={{ color: settings.nameField }}
+                      style={{
+                        color: settings.nameField,
+                        fontFamily: settings.boardNameFont,
+                      }}
                     >
                       {name}
                     </td>
                     <td
                       className="py-4 px-4 w-1/3 text-left text-xl font-afc font-semibold"
-                      style={{ color: settings.rankingField }}
+                      style={{
+                        color: settings.rankingField,
+                        fontFamily: settings.boardRankFont,
+                      }}
                     >
                       {score}
                     </td>
@@ -213,16 +241,26 @@ const PublicBoard = ({ board }) => {
             <table className="w-full border-none">
               <thead>
                 <tr
-                  className="border-none"
+                  className="border-none uppercase"
                   style={{ color: settings.tableHeaders }}
                 >
                   <th className="py-2 px-4 w-1/6 font-medium text-sm text-center font-dm">
                     Rank
                   </th>
-                  <th className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm">
-                    {settings.nameText}
+                  <th
+                    style={{
+                      fontFamily: settings.boardNameTitleFont,
+                    }}
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm"
+                  >
+                    {settings.nameTitle}
                   </th>
-                  <th className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm">
+                  <th
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm"
+                    style={{
+                      fontFamily: settings.boardRankTitleFont,
+                    }}
+                  >
                     {settings.rankingTitle}
                   </th>
                 </tr>
@@ -244,13 +282,19 @@ const PublicBoard = ({ board }) => {
                     </td>
                     <td
                       className="py-4 px-4 w-1/2 text-xl font-afc font-semibold"
-                      style={{ color: settings.nameField }}
+                      style={{
+                        color: settings.nameField,
+                        fontFamily: settings.boardNameFont,
+                      }}
                     >
                       {name}
                     </td>
                     <td
                       className="py-4 px-4 w-1/3 text-left text-xl font-afc font-semibold"
-                      style={{ color: settings.rankingField }}
+                      style={{
+                        color: settings.rankingField,
+                        fontFamily: settings.boardRankFont,
+                      }}
                     >
                       {score}
                     </td>

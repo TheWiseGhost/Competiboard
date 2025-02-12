@@ -160,7 +160,7 @@ const DataSettings = ({ id }) => {
   return (
     <div className="bg-white rounded-lg pt-16 font-dm">
       <h2 className="text-3xl font-medium">Board Data Settings</h2>
-      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_light_coral/70 w-96 h-0.5" />
 
       {/* Filter Settings */}
       <div className="grid grid-cols-2 pr-32">
@@ -233,7 +233,7 @@ const DataSettings = ({ id }) => {
                 key={tab}
                 className={`px-4 py-1 rounded-md border ${
                   dateSettings.selectedTabs.includes(tab)
-                    ? "border-coral"
+                    ? "border-light_coral"
                     : "bg-neutral-100 border-neutral-100 "
                 }`}
                 onClick={() => toggleTab(tab)}
@@ -254,7 +254,7 @@ const DataSettings = ({ id }) => {
               key={method}
               className={`px-6 py-2 rounded-md ${
                 selectedMethod === method
-                  ? "border-coral border-2"
+                  ? "border-light_coral border-2"
                   : "bg-neutral-100"
               }`}
               onClick={() => setSelectedMethod(method)}
@@ -322,7 +322,7 @@ const DataSettings = ({ id }) => {
       <div>
         <button
           onClick={handleSubmit}
-          className="mt-8 px-6 py-2 bg-coral text-white rounded-md hover:bg-coral/80 transition-colors"
+          className="mt-8 px-6 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
         >
           Save Settings
         </button>
