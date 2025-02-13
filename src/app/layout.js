@@ -44,7 +44,7 @@ export default function RootLayout({ children }) {
           />
         </head>
         <body
-          className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable}`}
+          className={`${font.variable} ${inter.variable} ${mon.variable} ${afc.variable} bg-white text-black`}
         >
           <GrammarlyCleanup />
           <main>{children}</main>
