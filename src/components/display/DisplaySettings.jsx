@@ -32,6 +32,36 @@ const DisplaySettings = ({ id }) => {
 
   const { user } = useUser();
   const { toast } = useToast();
+  const [userDetails, setUserDetails] = useState({});
+
+  // Fetch user details
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/user_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch user details");
+
+        const result = await response.json();
+        if (result.data) {
+          setUserDetails(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (user?.id) fetchUserDetails();
+  }, [user]);
 
   // Fetch board details on component mount or when user/id changes
   useEffect(() => {
@@ -173,32 +203,59 @@ const DisplaySettings = ({ id }) => {
                 (Leave blank for default)
               </span>
             </h4>
-            {[
-              "titleFont",
-              "subtitleFont",
-              "boardRankTitleFont",
-              "boardRankFont",
-              "boardNameTitleFont",
-              "boardNameFont",
-            ].map((field) => (
-              <div key={field} className="flex items-center mt-4">
-                <div className="rounded-full size-2 bg-gold" />
-                <label className="block font-medium pl-2 pr-4 capitalize">
-                  {field
-                    .replace(/([A-Z])/g, " $1")
-                    .replace("board ", "")
-                    .trim()}
-                  :
-                </label>
-                <input
-                  className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
-                  type="text"
-                  placeholder="e.g., 'Roboto', sans-serif"
-                  value={settings[field]}
-                  onChange={(e) => handleChange(field, e.target.value)}
-                />
-              </div>
-            ))}
+            <div className="relative">
+              {userDetails.plan !== "pro" && (
+                <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-col items-center justify-center gap-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-gray-600"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                    />
+                  </svg>
+                  <a
+                    href="/checkout"
+                    className="px-4 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
+                  >
+                    Upgrade to Pro
+                  </a>
+                </div>
+              )}
+              {[
+                "titleFont",
+                "subtitleFont",
+                "boardRankTitleFont",
+                "boardRankFont",
+                "boardNameTitleFont",
+                "boardNameFont",
+              ].map((field) => (
+                <div key={field} className="flex items-center mt-4">
+                  <div className="rounded-full size-2 bg-gold" />
+                  <label className="block font-medium pl-2 pr-4 capitalize">
+                    {field
+                      .replace(/([A-Z])/g, " $1")
+                      .replace("board ", "")
+                      .trim()}
+                    :
+                  </label>
+                  <input
+                    className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
+                    type="text"
+                    placeholder="e.g., 'Roboto', sans-serif"
+                    value={settings[field]}
+                    onChange={(e) => handleChange(field, e.target.value)}
+                    disabled={userDetails.plan !== "pro"}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

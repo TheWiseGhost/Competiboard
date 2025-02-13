@@ -33,6 +33,36 @@ const DataSettings = ({ id }) => {
   const { user } = useUser();
   const { toast } = useToast();
 
+  const [userDetails, setUserDetails] = useState({});
+  // Fetch user details
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/user_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch user details");
+
+        const result = await response.json();
+        if (result.data) {
+          setUserDetails(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (user?.id) fetchUserDetails();
+  }, [user]);
+
   useEffect(() => {
     const fetchDataDetails = async () => {
       try {
@@ -160,35 +190,71 @@ const DataSettings = ({ id }) => {
   return (
     <div className="bg-white rounded-lg pt-16 font-dm">
       <h2 className="text-3xl font-medium">Board Data Settings</h2>
-      <div className="mt-4 mb-8 bg-light_light_coral/70 w-96 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       {/* Filter Settings */}
       <div className="grid grid-cols-2 pr-32">
         <div>
           <h3 className="text-2xl font-medium mb-4">Filter Settings</h3>
-          <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-gold" />
-            <label className="block font-medium pl-2 pr-4">
-              Filter In Field:
-            </label>
-            <input
-              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
-              type="text"
-              value={filterFields.filterIn}
-              onChange={(e) => handleFilterChange("filterIn", e.target.value)}
-            />
-          </div>
-          <div className="flex flex-row items-center mt-4">
-            <div className="rounded-full size-2 bg-gold" />
-            <label className="block font-medium pl-2 pr-4">
-              Filter Out Field:
-            </label>
-            <input
-              className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
-              type="text"
-              value={filterFields.filterOut}
-              onChange={(e) => handleFilterChange("filterOut", e.target.value)}
-            />
+          <div className="relative">
+            {userDetails.plan !== "pro" && (
+              <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-row items-center justify-start">
+                <div className="flex flex-col items-center justify-center gap-3 w-fit pt-10">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-8 h-8 text-gray-600"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                    />
+                  </svg>
+                  <a
+                    href="/checkout"
+                    className="px-4 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
+                  >
+                    Upgrade to Pro
+                  </a>
+                </div>
+              </div>
+            )}
+            {
+              <>
+                <div className="flex flex-row items-center mt-4">
+                  <div className="rounded-full size-2 bg-gold" />
+                  <label className="block font-medium pl-2 pr-4">
+                    Filter In Field:
+                  </label>
+                  <input
+                    className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
+                    type="text"
+                    value={filterFields.filterIn}
+                    onChange={(e) =>
+                      handleFilterChange("filterIn", e.target.value)
+                    }
+                  />
+                </div>
+                <div className="flex flex-row items-center mt-4">
+                  <div className="rounded-full size-2 bg-gold" />
+                  <label className="block font-medium pl-2 pr-4">
+                    Filter Out Field:
+                  </label>
+                  <input
+                    className="w-1/2 p-2 rounded-md bg-neutral-100 focus:bg-white"
+                    type="text"
+                    value={filterFields.filterOut}
+                    onChange={(e) =>
+                      handleFilterChange("filterOut", e.target.value)
+                    }
+                  />
+                </div>
+              </>
+            }
           </div>
         </div>
 

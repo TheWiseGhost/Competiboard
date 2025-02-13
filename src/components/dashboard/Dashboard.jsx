@@ -237,7 +237,7 @@ const DashboardComponent = () => {
       )}
       <Drawer>
         <DrawerTrigger>
-          <span className="bg-light_coral font-dm text-white hover:bg-light_coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
+          <span className="bg-light_coral font-dm text-white hover:bg-light_coral/80 transition duration-200 inline-flex items-center justify-center rounded-lg px-5 py-3 text-base font-medium focus:outline-none focus:ring-2 focus:ring-ring disabled:opacity-50 disabled:pointer-events-none">
             Create Board
           </span>
         </DrawerTrigger>

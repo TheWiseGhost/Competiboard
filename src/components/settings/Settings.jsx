@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import UserInfoForm from "./UserInfoForm";
 import { useUser } from "@clerk/nextjs";
 
@@ -27,13 +27,44 @@ const Header = ({ title, subtitle }) => (
 
 const SettingsComponent = () => {
   const { user } = useUser();
+  const [userDetails, setUserDetails] = useState({});
+  useEffect(() => {
+    const fecthUserDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/user_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch user details");
+
+        const result = await response.json();
+        if (result.data) {
+          setUserDetails(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching board details:", error);
+      }
+    };
+
+    if (user?.id) fecthUserDetails();
+  }, [user]);
+
   return (
     <div className="w-full justify-start pt-12">
       <UserInfoForm
         email={user?.emailAddresses[0].emailAddress}
         name={user?.fullName}
-        // Fix plan stuff later
-        plan={"free"}
+        plan={
+          userDetails?.plan?.charAt(0).toUpperCase() +
+            userDetails?.plan?.slice(1) || ""
+        }
       />
     </div>
   );

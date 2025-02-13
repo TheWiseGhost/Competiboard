@@ -139,7 +139,7 @@ const AddDataSource = ({ id }) => {
   return (
     <div className="bg-white rounded-lg font-dm pt-12">
       <h2 className="text-3xl font-medium">Add Data Source</h2>
-      <div className="mt-4 mb-8 bg-light_light_coral/70 w-96 h-0.5" />
+      <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       <div className="mt-4 flex flex-row items-center space-x-4">
         <p className="font-medium">Source:</p>
