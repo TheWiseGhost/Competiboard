@@ -36,10 +36,12 @@ export default clerkMiddleware((auth, request) => {
     return NextResponse.next();
   }
 
-  if (host === "localhost:3000") {
+  if (host === "localhost:3000" || host === "competiboard.vercel.app") {
     return NextResponse.next(); // Allow access for your main domain
   } else {
     // Redirect to your main domain if the request is not for /live/*
-    return NextResponse.redirect(new URL("http://localhost:3000", request.url));
+    return NextResponse.redirect(
+      new URL("https://competiboard.vercel.app", request.url)
+    );
   }
 });
