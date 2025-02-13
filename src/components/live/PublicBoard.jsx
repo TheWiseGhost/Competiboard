@@ -124,7 +124,7 @@ const PublicBoard = ({ board }) => {
       }}
     >
       <h2
-        className="text-5xl font-bold mb-4 text-left"
+        className="text-5xl font-bold mb-4 text-left font-euclid"
         style={{
           color: settings.titleColor,
           fontFamily: settings.titleFont,
@@ -133,7 +133,7 @@ const PublicBoard = ({ board }) => {
         {settings.title}
       </h2>
       <p
-        className="text-left text-lg mb-4"
+        className="text-left text-lg mb-4 font-dm"
         style={{
           color: settings.subtitleColor,
           fontFamily: settings.subtitleFont,
@@ -170,12 +170,12 @@ const PublicBoard = ({ board }) => {
                     style={{
                       fontFamily: settings.boardNameTitleFont,
                     }}
-                    className="py-2 px-4 w-1/2 font-medium text-left text-sm"
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
                   >
                     {settings.nameTitle}
                   </th>
                   <th
-                    className="py-2 px-4 w-1/3 font-medium text-left text-sm"
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
                     style={{
                       fontFamily: settings.boardRankTitleFont,
                     }}
@@ -251,12 +251,12 @@ const PublicBoard = ({ board }) => {
                     style={{
                       fontFamily: settings.boardNameTitleFont,
                     }}
-                    className="py-2 px-4 w-1/2 font-medium text-left text-sm"
+                    className="py-2 px-4 w-1/2 font-medium text-left text-sm font-dm"
                   >
                     {settings.nameTitle}
                   </th>
                   <th
-                    className="py-2 px-4 w-1/3 font-medium text-left text-sm"
+                    className="py-2 px-4 w-1/3 font-medium text-left text-sm font-dm"
                     style={{
                       fontFamily: settings.boardRankTitleFont,
                     }}

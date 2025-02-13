@@ -115,7 +115,12 @@ const DisplaySettings = ({ id }) => {
         <div className="grid grid-cols-2 gap-8">
           {/* Colors Section */}
           <div>
-            <h3 className="text-2xl font-medium mb-4">Colors</h3>
+            <h3 className="text-2xl font-medium mb-4 flex items-center">
+              Colors
+              <span className="text-base text-neutral-700 ml-4">
+                (Hex Codes - #000000)
+              </span>
+            </h3>
             {[
               "borders",
               "boardBackground",
@@ -162,7 +167,12 @@ const DisplaySettings = ({ id }) => {
             ))}
 
             {/* Fonts Section */}
-            <h4 className="text-2xl font-medium mt-8 mb-4">Fonts</h4>
+            <h4 className="text-2xl font-medium mt-12 mb-4 flex items-center">
+              Fonts
+              <span className="text-base text-neutral-700 ml-4">
+                (Leave blank for default)
+              </span>
+            </h4>
             {[
               "titleFont",
               "subtitleFont",
