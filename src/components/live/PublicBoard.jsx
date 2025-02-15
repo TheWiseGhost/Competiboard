@@ -32,6 +32,8 @@ const PublicBoard = ({ board }) => {
     boardNameFont: "",
   });
 
+  const [userDetails, setUserDetails] = useState({});
+
   useEffect(() => {
     const fetchBoardDetails = async () => {
       try {
@@ -49,6 +51,7 @@ const PublicBoard = ({ board }) => {
         const result = await response.json();
         if (result.data) {
           setSettings((prev) => ({ ...prev, ...result.data.display }));
+          setUserDetails(result.user_details);
           console.log("All settings:", result.data.display);
           console.log("Font family value:", result.data.display.boardNameFont);
         }
@@ -118,7 +121,7 @@ const PublicBoard = ({ board }) => {
 
   return (
     <div
-      className="w-full px-20 min-h-screen pt-12 pb-20"
+      className="w-full px-8 md:px-20 min-h-screen pt-12 pb-20"
       style={{
         backgroundColor: settings.pageBackground,
       }}
@@ -142,8 +145,8 @@ const PublicBoard = ({ board }) => {
         {settings.subtitle}
       </p>
 
-      <div className="flex flex-row w-full space-x-12">
-        <div className="overflow-x-auto w-1/2">
+      <div className="flex flex-col md:flex-row w-full md:space-x-16">
+        <div className="overflow-x-auto w-full md:w-1/2">
           <h2
             className="pb-4 pt-6 text-xl font-mon font-bold text-gray"
             style={{ color: settings.dateRange }}
@@ -151,12 +154,36 @@ const PublicBoard = ({ board }) => {
             All-time
           </h2>
           <div
-            className="overflow-x-auto w-full rounded-2xl p-4"
+            className="overflow-x-auto w-full rounded-2xl p-4 relative"
             style={{
               border: `1px solid ${settings.borders}`,
               backgroundColor: settings.boardBackground,
             }}
           >
+            {userDetails.plan !== "pro" && (
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-10 flex flex-col md:hidden items-center justify-start pt-12 gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-8 h-8 text-gray-900"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                  />
+                </svg>
+                <p
+                  href="/checkout"
+                  className="px-4 py-2 bg-light_coral text-white rounded-md w-fit font-dm"
+                >
+                  This board doesn't support mobile
+                </p>
+              </div>
+            )}
             <table className="w-full border-none">
               <thead>
                 <tr
@@ -224,7 +251,7 @@ const PublicBoard = ({ board }) => {
           </div>
         </div>
 
-        <div className="overflow-x-auto w-1/2">
+        <div className="overflow-x-auto w-full md:w-1/2">
           <h2
             className="pb-4 pt-6 text-xl font-mon font-bold text-gray"
             style={{ color: settings.dateRange }}
@@ -232,12 +259,36 @@ const PublicBoard = ({ board }) => {
             Last 30 Days
           </h2>
           <div
-            className="overflow-x-auto w-full rounded-2xl p-4"
+            className="overflow-x-auto w-full rounded-2xl p-4 relative"
             style={{
               border: `1px solid ${settings.borders}`,
               backgroundColor: settings.boardBackground,
             }}
           >
+            {userDetails.plan !== "pro" && (
+              <div className="absolute inset-0 bg-white/10 backdrop-blur-sm z-10 flex flex-col md:hidden items-center justify-start pt-12 gap-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-8 h-8 text-gray-900"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+                  />
+                </svg>
+                <p
+                  href="/checkout"
+                  className="px-4 py-2 bg-light_coral text-white rounded-md w-fit font-dm"
+                >
+                  This board doesn't support mobile
+                </p>
+              </div>
+            )}
             <table className="w-full border-none">
               <thead>
                 <tr
