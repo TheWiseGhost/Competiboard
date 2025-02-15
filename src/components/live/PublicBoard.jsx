@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
+import Loading from "../global/Loading";
 
 const medals = ["🥇", "🥈", "🥉"];
 
@@ -114,7 +115,9 @@ const PublicBoard = ({ board }) => {
 
   if (loading)
     return (
-      <div className="text-center text-gray-500">Loading leaderboard...</div>
+      <div className="items-center justify-center flex flex-col h-screen">
+        <Loading />
+      </div>
     );
   if (error)
     return <div className="text-center text-red-500">Error: {error}</div>;

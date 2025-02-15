@@ -41,7 +41,7 @@ const Header = ({ title, subtitle }) => (
   </div>
 );
 
-const GridItem = ({ id, title, thumbnail }) => {
+const GridItem = ({ title, thumbnail }) => {
   const container = {
     initial: {
       borderColor: "#404040", // neutral-700
@@ -71,7 +71,7 @@ const GridItem = ({ id, title, thumbnail }) => {
     >
       <div
         onClick={() => {
-          window.open(`http://localhost:3000/live/${id}`);
+          window.open(`http://localhost:3000/${title}`);
         }}
         className="rounded-lg overflow-hidden flex flex-col justify-center items-center h-64 w-fit mx-auto"
       >
@@ -222,7 +222,6 @@ const DashboardComponent = () => {
           {boards.map((board) => (
             <GridItem
               key={board.id}
-              id={board.id}
               title={board.title}
               thumbnail={board.thumbnail}
             />

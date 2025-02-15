@@ -130,6 +130,7 @@ const AddDataSource = ({ id }) => {
           type="text"
           name={field}
           value={inputValues[selectedSource][field]}
+          placeholder="Case Sensitive + No quotation marks"
           onChange={(e) => handleInputChange(e.target.name, e.target.value)}
         />
       </div>

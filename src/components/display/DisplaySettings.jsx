@@ -124,10 +124,13 @@ const DisplaySettings = ({ id }) => {
 
       toast({
         title: "Board Updated",
-        description: "Your display settings have been saved!",
+        description: "Good Progress!",
         action: (
-          <ToastAction onClick={() => {}} altText="Close">
-            Close
+          <ToastAction
+            onClick={() => window.open(`/live/${id}/`, "_blank")}
+            altText="Close"
+          >
+            View Board
           </ToastAction>
         ),
       });

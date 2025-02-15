@@ -8,7 +8,7 @@ import {
 
 const FAQs = () => {
   return (
-    <div className="min-h-screen pt-24 md:pt-32 pb-8 px-4 md:px-24">
+    <div className="min-h-screen pt-24 md:pt-32 pb-24 px-4 md:px-24">
       <h1 className="text-7xl font-euclid text-center font-semibold mb-12">
         FAQs<span className="text-red-500">.</span>
       </h1>
@@ -20,13 +20,12 @@ const FAQs = () => {
           className="w-5/6 md:w-1/2 mx-auto font-dm h-80"
         >
           <AccordionItem value="item-1">
-            <AccordionTrigger>Fill FAQs up Later</AccordionTrigger>
+            <AccordionTrigger>What features do I get on Pro</AccordionTrigger>
             <AccordionContent>
-              Trust us, going through the headaches of fufillment, chargebacks,
-              refunds, and more are not worth it for a few sales. Make sure the
-              product's a winner before accepting money. Plus, emailing those
-              who completed checkout to buy again later has above an 85%
-              conversion rate for our current users.
+              You can get give your board access to filtering, fonts, different
+              data indexing methods, and mobile leaderboards. Plus you will get
+              access to many more smaller features and updates that we
+              constantly release. You can request new features too!
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
@@ -37,16 +36,23 @@ const FAQs = () => {
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger>
-              How long does it take to launch a drop?
+              How long does it to make my board?
             </AccordionTrigger>
             <AccordionContent>
-              Building the drop can take about 10 minutes if you have all the
-              product images ready to go. Launching it takes no effort or time
-              either, just depends on how long your domain provider takes to
-              connect your domain.
+              Building the board can take about 5 minutes. All you have to do is
+              style the board to your liking and add you data urls or api keys.
+              Plus, you can try Competiboard for free to see how your own board
+              will look!
             </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-4">
+            <AccordionTrigger>What url will my board be on?</AccordionTrigger>
+            <AccordionContent>
+              Your board will be hosted on competiboard.com/'yourBusinessName'.
+              Claim your url before someone else does!
+            </AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-5">
             <AccordionTrigger>How do I contact you?</AccordionTrigger>
             <AccordionContent>
               Contact us at founder's email: byjuaditya@gmail.com

@@ -237,6 +237,7 @@ const DataSettings = ({ id }) => {
                     onChange={(e) =>
                       handleFilterChange("filterIn", e.target.value)
                     }
+                    placeholder="'username'=='Aditya Byju'"
                   />
                 </div>
                 <div className="flex flex-row items-center mt-4">
@@ -251,6 +252,7 @@ const DataSettings = ({ id }) => {
                     onChange={(e) =>
                       handleFilterChange("filterOut", e.target.value)
                     }
+                    placeholder="'username'=='Aditya Byju'"
                   />
                 </div>
               </>
@@ -271,6 +273,7 @@ const DataSettings = ({ id }) => {
               type="text"
               value={dateSettings.dateField}
               onChange={(e) => handleDateFieldChange(e.target.value)}
+              placeholder="created_at"
             />
           </div>
           <div className="flex flex-row items-center mt-4">
@@ -281,6 +284,7 @@ const DataSettings = ({ id }) => {
               type="text"
               value={dateSettings.dateFormat}
               onChange={(e) => handleDateFormatChange(e.target.value)}
+              placeholder="MM/DD/YY"
             />
           </div>
           <div className="flex flex-row items-center mt-4 mb-2">
@@ -312,7 +316,7 @@ const DataSettings = ({ id }) => {
       </div>
 
       {/* Method Selection */}
-      <div className="mt-12">
+      <div className="">
         <h3 className="text-2xl font-medium mb-2">Method:</h3>
         <div className="flex gap-4">
           {["Doc Sum", "Classic"].map((method) => (
@@ -334,23 +338,23 @@ const DataSettings = ({ id }) => {
       {/* Field Sum Inputs */}
       {selectedMethod === "Doc Sum" ? (
         <div className="mt-10 flex flex-wrap gap-y-6 gap-x-4 pr-80 items-center">
-          <p className="text-lg font-medium">
-            Grab all filtered documents and sum field:
+          <p className="text-base font-medium">
+            Grab all filtered documents/rows and sum field:
           </p>
           <input
             type="text"
             className="p-3 rounded-md bg-neutral-100 focus:bg-white"
-            placeholder="Sum field"
+            placeholder="views"
             value={sumFields.sumField}
             onChange={(e) => handleSumFieldChange("sumField", e.target.value)}
           />
-          <p className="text-lg font-medium">
+          <p className="text-base font-medium">
             and use it to sort rows. For each row, make the display field:
           </p>
           <input
             type="text"
             className="p-3 rounded-md bg-neutral-100 focus:bg-white"
-            placeholder="Display field"
+            placeholder="username"
             value={sumFields.displayField}
             onChange={(e) =>
               handleSumFieldChange("displayField", e.target.value)
@@ -359,25 +363,25 @@ const DataSettings = ({ id }) => {
         </div>
       ) : (
         <div className="mt-10 flex flex-wrap gap-y-6 gap-x-4 pr-80 items-center">
-          <p className="text-lg font-medium">
+          <p className="text-base font-medium">
             Grab all filtered documents and take value field:
           </p>
           <input
             type="text"
             className="p-3 rounded-md bg-neutral-100 focus:bg-white"
-            placeholder="Value field"
+            placeholder="views"
             value={classicFields.valueField}
             onChange={(e) =>
               handleClassicFieldChange("valueField", e.target.value)
             }
           />
-          <p className="text-lg font-medium">
+          <p className="text-base font-medium">
             and use it to sort rows. For each row, make the display field:
           </p>
           <input
             type="text"
             className="p-3 rounded-md bg-neutral-100 focus:bg-white"
-            placeholder="Display field"
+            placeholder="username"
             value={classicFields.displayField}
             onChange={(e) =>
               handleClassicFieldChange("displayField", e.target.value)
