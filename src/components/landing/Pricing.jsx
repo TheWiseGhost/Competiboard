@@ -82,7 +82,7 @@ const Pricing = () => {
             <span className="text-gray-800 text-sm">/month</span>
           </div>
           <button
-            onClick={() => createCheckout("prod_RkfoQuyM98ny66")}
+            onClick={() => createCheckout("prod_RmO52yWy4eNtNq")}
             className="w-full text-black border-2 font-semibold border-black rounded-full py-2 px-4 hover:bg-opacity-15 mx-auto hover:bg-white transition-colors"
           >
             Get Started
