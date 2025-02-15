@@ -8,7 +8,7 @@ import {
 
 const FAQs = () => {
   return (
-    <div className="min-h-screen pt-32 pb-8 px-4 md:px-24">
+    <div className="min-h-screen pt-24 md:pt-32 pb-8 px-4 md:px-24">
       <h1 className="text-7xl font-euclid text-center font-semibold mb-12">
         FAQs<span className="text-red-500">.</span>
       </h1>

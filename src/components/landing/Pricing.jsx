@@ -43,7 +43,7 @@ const Pricing = () => {
     }
   };
   return (
-    <div className="min-h-screen pt-40 pb-8 px-4 md:px-24">
+    <div className="min-h-screen pt-28 md:pt-40 pb-8 px-4 md:px-24">
       <h1 className="text-7xl font-euclid font-semibold mb-12">
         Pricing<span className="text-red-500">.</span>
       </h1>

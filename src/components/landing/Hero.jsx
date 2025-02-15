@@ -41,7 +41,7 @@ const Hero = () => {
           </span>
         </div>
 
-        <div className="flex gap-6">
+        <div className="hidden md:flex gap-6">
           <NavButton text="Process" href="#process" />
           <a
             onClick={() => window.open("/checkout")}
@@ -99,7 +99,7 @@ const Hero = () => {
 
         <a
           href="/dashboard"
-          className="relative font-euclid font-semibold mr-6 inline-flex h-12 overflow-hidden rounded-full p-[4px]"
+          className="relative font-euclid font-semibold mr-2 md:mr-6 inline-flex h-12 overflow-hidden rounded-full p-[4px]"
         >
           <span className="absolute inset-[-100%] animate-[spin_1s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#FF9B95_0%,#edeceb_50%,#FF9B95_100%)]" />
           <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-5 py-2 text-sm font-medium text-white backdrop-blur-3xl">
@@ -110,8 +110,8 @@ const Hero = () => {
 
       {/* Main Content */}
       <main className=" flex flex-col mx-auto mt-16 text-center px-4">
-        <h1 className="text-7xl font-bold mb-8 font-euclid">
-          <span className="text-8xl pr-2">🥇</span>
+        <h1 className="text-5xl md:text-7xl font-bold mb-8 font-euclid">
+          <span className="text-6xl md:text-8xl pr-2">🥇</span>
           <span className="inline-block bg-black text-white pl-3 pr-4 py-2 mr-2">
             Boost
           </span>
@@ -122,11 +122,11 @@ const Hero = () => {
           <span className="text-red-500">.</span>
         </h1>
 
-        <p className="text-xl text-gray-800 text-center w-[850px] mb-12 mx-auto font-afc leading-8">
+        <p className="text-sm md:text-xl text-gray-800 text-center w-full md:w-[850px] mb-12 mx-auto font-afc leading-8 px-1 md:px-0">
           Competiboard helps you effortlessly launch your{" "}
           <span className="font-bold">Custom Leaderboard</span> based on your
           users to generate{" "}
-          <span className="bg-coral/80 text-black px-2 rounded">
+          <span className="bg-coral/80 text-black px-1 md:px-2 rounded">
             healthy competition.
           </span>{" "}
           Board builder, rewards, backend, db connections, filtering, all done
@@ -134,7 +134,7 @@ const Hero = () => {
         </p>
 
         <div className="flex justify-center w-fit mx-auto py-1 px-1 rounded-full bg-white border-black border-2 items-center font-inter">
-          <div className="flex items-center pl-4 pr-2 py-2">
+          <div className="hidden md:flex items-center pl-4 pr-2 py-2">
             <span className="text-black font-semibold">competiboard.com/</span>
             <input
               type="text"

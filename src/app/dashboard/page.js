@@ -79,10 +79,10 @@ export default function SidebarDemo({ params }) {
       </div>
       <div className="flex flex-col md:hidden bg-gray-100 min-h-screen items-center justify-center text-center">
         <img src="CompetiboardLogo.png" className="w-1/3" />
-        <h1 className="font-dm font-semibold text-3xl pt-6 pb-2">
+        <h1 className="font-euclid font-semibold text-3xl pt-6 pb-4">
           Mobile not supported
         </h1>
-        <p className="text-gray-700 text-base">
+        <p className="text-gray-700 font-inter text-sm">
           Try Competiboard on a bigger device
         </p>
       </div>

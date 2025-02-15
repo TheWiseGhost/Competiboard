@@ -2,7 +2,7 @@ import React from "react";
 
 const Example = () => {
   return (
-    <div className="flex w-full min-h-screen pb-24 pr-12">
+    <div className="hidden md:flex w-full min-h-screen pb-24 pr-12">
       {/* Left side with text */}
       <div className="w-1/5 flex">
         <div className="flex flex-col space-y-4 text-left font-euclid -rotate-90 pt-44">
