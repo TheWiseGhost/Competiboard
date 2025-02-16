@@ -149,6 +149,21 @@ const DashboardComponent = () => {
             description:
               "Someone owns a board with this title already exists. Choose a different title",
           });
+        } else if (data.pro) {
+          toast({
+            title: `Pro Plan Required`,
+            description: "You can only create max 3 boards",
+            action: (
+              <ToastAction
+                onClick={() => {
+                  window.location.href = "/checkout/";
+                }}
+                altText="Go to Checkout"
+              >
+                Upgrade
+              </ToastAction>
+            ),
+          });
         } else {
           toast({
             title: `Board Added: ${title}`,
