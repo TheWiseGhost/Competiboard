@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import { useState, useEffect } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -11,33 +11,85 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "../global/Drawer";
+import { useUser } from "@clerk/nextjs";
+import { ToastAction } from "../global/Toast";
+import { useToast } from "../global/Use-Toast";
 
 const RewardsManager = ({ id }) => {
-  const [emailContent, setEmailContent] = React.useState("");
-  const [emailField, setEmailField] = React.useState("");
-  const [timeRange, setTimeRange] = React.useState("30");
-  const [minRank, setMinRank] = React.useState(1);
-  const [maxRank, setMaxRank] = React.useState(3);
-  const [isConfirmed, setIsConfirmed] = React.useState(false);
+  const [emailContent, setEmailContent] = useState("");
+  const [emailField, setEmailField] = useState("");
+  const [timeRange, setTimeRange] = useState("30");
+  const [minRank, setMinRank] = useState(1);
+  const [maxRank, setMaxRank] = useState(3);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const { user } = useUser();
+  const { toast } = useToast();
+
+  useEffect(() => {
+    const fetchRewardDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/reward_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ board_id: id, clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch board details");
+
+        const result = await response.json();
+        if (result.data) {
+          console.log(result.data);
+          setEmailContent(result.data.email_body);
+          setEmailField(result.data.email_field);
+        }
+      } catch (error) {
+        console.error("Error fetching board details:", error);
+      }
+    };
+
+    if (id && user?.id) fetchRewardDetails();
+  }, [id, user]);
 
   const handleSave = async () => {
     try {
-      const response = await fetch("/api/save_rewards/", {
+      const response = await fetch("http://127.0.0.1:8000/api/update_reward/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id,
-          emailContent,
-          emailField,
+          board_id: id,
+          clerk_id: user?.id,
+          email_body: emailContent,
+          email_field: emailField,
         }),
       });
       if (!response.ok) throw new Error("Failed to save rewards");
-      alert("Rewards saved successfully!");
+      toast({
+        title: `Rewards Updated`,
+        description: "Good Progress =)",
+        action: (
+          <ToastAction onClick={() => {}} altText="Close">
+            Close
+          </ToastAction>
+        ),
+      });
     } catch (error) {
       console.error("Save error:", error);
-      alert("Failed to save rewards");
+      toast({
+        title: `Failed to save Rewards`,
+        description: "Reload or contact support",
+        action: (
+          <ToastAction onClick={() => {}} altText="Close">
+            Close
+          </ToastAction>
+        ),
+      });
     }
   };
 
@@ -52,16 +104,16 @@ const RewardsManager = ({ id }) => {
     }
 
     try {
-      const response = await fetch("/api/send_rewards/", {
+      const response = await fetch("http://127.0.0.1:8000/api/send_rewards/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          id,
-          timeRange,
-          minRank,
-          maxRank,
+          board_id: id,
+          time: timeRange,
+          min_rank: minRank,
+          max_rank: maxRank,
         }),
       });
       if (!response.ok) throw new Error("Failed to send rewards");
@@ -78,23 +130,11 @@ const RewardsManager = ({ id }) => {
       <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       <div className="space-y-6 mb-8">
-        <div>
-          <label className="flex flex-row items-center text-base font-medium text-black mb-2">
-            <div className="rounded-full size-2 mr-2 bg-gold" />
-            Email Content
-          </label>
-          <textarea
-            value={emailContent}
-            onChange={(e) => setEmailContent(e.target.value)}
-            className="w-3/5 p-3 border rounded-lg"
-            rows="5"
-            placeholder="Enter email content..."
-          />
-        </div>
-
-        <div className="flex flex-row items-center mt-4">
+        <div className="flex flex-row items-center mb-4">
           <div className="rounded-full size-2 bg-gold" />
-          <label className="block font-medium pl-2 pr-4">Email Field:</label>
+          <label className="block text-lg font-medium pl-2 pr-4">
+            Email Field:
+          </label>
           <input
             type="email"
             value={emailField}
@@ -103,33 +143,47 @@ const RewardsManager = ({ id }) => {
             placeholder="email"
           />
         </div>
+
+        <div>
+          <label className="flex flex-row items-center text-lg font-medium text-black mb-2">
+            <div className="rounded-full size-2 mr-2 bg-gold" />
+            Email Content
+          </label>
+          <textarea
+            value={emailContent}
+            onChange={(e) => setEmailContent(e.target.value)}
+            className="w-3/5 p-3 border rounded-lg"
+            rows="5"
+            placeholder="Enter email content... (like discount codes or nice messages or etc)"
+          />
+        </div>
       </div>
 
-      <div className="flex gap-20">
+      <div className="flex gap-16 pt-4">
         <button
           onClick={handleSave}
-          className="px-6 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
+          className="px-5 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
         >
           Save Rewards
         </button>
 
         <Drawer>
           <DrawerTrigger>
-            <button className="px-6 py-2 bg-black text-white rounded-md hover:bg-gold transition duration-200">
+            <span className="px-5 py-2 bg-black text-white rounded-md hover:bg-gold transition duration-300">
               Send Rewards
-            </button>
+            </span>
           </DrawerTrigger>
           <DrawerContent>
             <div className="h-fit w-2/5 flex flex-col mx-auto min-h-96 pb-4">
               <div className="mx-auto h-2 rounded-2xl bg-neutral-200 w-1/5"></div>
               <DrawerHeader>
-                <DrawerTitle className="font-euclid font-semibold text-4xl text-black pt-4">
+                <DrawerTitle className="font-euclid font-semibold text-5xl text-black">
                   Send Rewards
-                  <span className="text-red-500 text-5xl">.</span>
+                  <span className="text-red-500 text-6xl">.</span>
                 </DrawerTitle>
               </DrawerHeader>
 
-              <div className="p-4 space-y-6">
+              <div className="p-4 space-y-6 font-dm">
                 <div>
                   <h3 className="text-lg font-medium mb-3">Time Range</h3>
                   <div className="flex gap-4">
@@ -139,7 +193,7 @@ const RewardsManager = ({ id }) => {
                         value="30"
                         checked={timeRange === "30"}
                         onChange={(e) => setTimeRange(e.target.value)}
-                        className="w-4 h-4 text-light_coral"
+                        className="w-4 h-4"
                       />
                       Last 30 Days
                     </label>
@@ -149,7 +203,7 @@ const RewardsManager = ({ id }) => {
                         value="all"
                         checked={timeRange === "all"}
                         onChange={(e) => setTimeRange(e.target.value)}
-                        className="w-4 h-4 text-light_coral"
+                        className="w-4 h-4"
                       />
                       All Time
                     </label>
@@ -157,7 +211,15 @@ const RewardsManager = ({ id }) => {
                 </div>
 
                 <div>
-                  <h3 className="text-lg font-medium mb-3">Rank Range</h3>
+                  <h3 className="text-lg font-medium mb-3 flex flex-row items-center">
+                    Rank Range{" "}
+                    <span className="text-gray-700 text-sm pl-2">
+                      (Inclusive)
+                    </span>
+                    <span className="text-gray-700 text-sm pl-2">
+                      (Send to these ranks)
+                    </span>
+                  </h3>
                   <div className="flex items-center gap-4">
                     <input
                       type="number"
@@ -186,7 +248,7 @@ const RewardsManager = ({ id }) => {
                       className="w-4 h-4 text-light_coral rounded"
                     />
                     <span className="text-sm text-gray-700">
-                      I confirm that I want to send these rewards
+                      I confirm that I want to send these reward emails
                     </span>
                   </label>
                 </div>
@@ -194,13 +256,13 @@ const RewardsManager = ({ id }) => {
 
               <DrawerFooter>
                 <DrawerClose>
-                  <button
+                  <span
                     onClick={handleSend}
                     disabled={!isConfirmed}
                     className="bg-light_coral font-dm w-4/5 mx-auto text-white hover:bg-light_coral/80 transition duration-200 inline-flex items-center justify-center rounded-md px-4 py-2 text-base font-medium disabled:opacity-50 disabled:pointer-events-none"
                   >
                     Confirm and Send
-                  </button>
+                  </span>
                 </DrawerClose>
               </DrawerFooter>
             </div>

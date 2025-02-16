@@ -28,7 +28,7 @@ const EditReward = ({ id }) => {
   return (
     <div className="flex flex-grow flex-col w-full pb-20 bg-[#FFFFFF] rounded-tl-[20px] border-l-[3px] border-black overflow-y-auto pl-12 pt-8">
       <Header title={"Edit Your Board's Rewards"} subtitle={"Rewards"} />
-      <RewardsManager />
+      <RewardsManager id={id} />
     </div>
   );
 };
