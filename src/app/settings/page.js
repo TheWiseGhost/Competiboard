@@ -12,6 +12,7 @@ import {
   IconSettings,
   IconReportAnalytics,
   IconEye,
+  IconDiamond,
 } from "@tabler/icons-react";
 import { UserButton } from "@clerk/nextjs";
 import Link from "next/link";
@@ -44,6 +45,11 @@ export default function SidebarDemo({ params }) {
       icon: (
         <IconReportAnalytics className="text-neutral-800 size-5 flex-shrink-0" />
       ),
+    },
+    {
+      label: "Edit Rewards",
+      href: "/board/rewards",
+      icon: <IconDiamond className="text-neutral-800 size-5 flex-shrink-0" />,
     },
     {
       label: "Settings",

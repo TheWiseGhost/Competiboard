@@ -25,6 +25,36 @@ const RewardsManager = ({ id }) => {
   const { user } = useUser();
   const { toast } = useToast();
 
+  const [userDetails, setUserDetails] = useState({});
+  // Fetch user details
+  useEffect(() => {
+    const fetchUserDetails = async () => {
+      try {
+        const response = await fetch(
+          "http://127.0.0.1:8000/api/user_details/",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ clerk_id: user?.id }),
+          }
+        );
+
+        if (!response.ok) throw new Error("Failed to fetch user details");
+
+        const result = await response.json();
+        if (result.data) {
+          setUserDetails(result.data);
+        }
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+      }
+    };
+
+    if (user?.id) fetchUserDetails();
+  }, [user]);
+
   useEffect(() => {
     const fetchRewardDetails = async () => {
       try {
@@ -111,6 +141,7 @@ const RewardsManager = ({ id }) => {
         },
         body: JSON.stringify({
           board_id: id,
+          clerk_id: user?.id,
           time: timeRange,
           min_rank: minRank,
           max_rank: maxRank,
@@ -125,7 +156,33 @@ const RewardsManager = ({ id }) => {
   };
 
   return (
-    <div className="bg-white rounded-lg font-dm pt-12 h-screen">
+    <div className="bg-white rounded-lg font-dm pt-12 h-screen relative">
+      {user && userDetails.plan !== "pro" && (
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-sm z-10 flex flex-row justify-center">
+          <div className="flex flex-col items-center justify-center gap-3 w-fit">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-8 h-8 text-gray-600"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M16.5 10.5V6.75a4.5 4.5 0 10-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 002.25-2.25v-6.75a2.25 2.25 0 00-2.25-2.25H6.75a2.25 2.25 0 00-2.25 2.25v6.75a2.25 2.25 0 002.25 2.25z"
+              />
+            </svg>
+            <a
+              href="/checkout"
+              className="px-4 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"
+            >
+              Upgrade to Pro
+            </a>
+          </div>
+        </div>
+      )}
       <h2 className="text-3xl font-medium">Rewards Settings</h2>
       <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
@@ -159,7 +216,7 @@ const RewardsManager = ({ id }) => {
         </div>
       </div>
 
-      <div className="flex gap-16 pt-4">
+      <div className="flex gap-12 pt-4">
         <button
           onClick={handleSave}
           className="px-5 py-2 bg-light_coral text-white rounded-md hover:bg-light_coral/80 transition duration-200"

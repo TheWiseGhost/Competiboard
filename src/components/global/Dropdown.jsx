@@ -3,7 +3,6 @@ import { FiChevronDown } from "react-icons/fi";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { useUser } from "@clerk/nextjs";
-import Loading from "./Loading";
 
 const Dropdown = ({ page }) => {
   const [boards, setBoards] = useState([]);
@@ -61,7 +60,7 @@ const Dropdown = ({ page }) => {
           className="flex flex-col gap-2 p-2 rounded-lg bg-white shadow-2xl absolute top-[120%] left-[50%] w-48 overflow-hidden"
         >
           {loading ? (
-            <Loading /> // Show the loading indicator when fetching
+            <p className="font-dm text-gray-700 text-sm">Loading...</p> // Show the loading indicator when fetching
           ) : boards.length > 0 ? (
             boards.map((board) => (
               <Option
