@@ -8,7 +8,7 @@ import {
 } from "../../../components/global/Sidebar";
 import {
   IconBrandTabler,
-  IconHammer,
+  IconPalette,
   IconSettings,
   IconReportAnalytics,
   IconEye,
@@ -40,7 +40,7 @@ export default function SidebarDemo({ params }) {
     {
       label: "Edit Display",
       href: "/board/display",
-      icon: <IconHammer className="text-neutral-800 size-5 flex-shrink-0" />,
+      icon: <IconPalette className="text-neutral-800 size-5 flex-shrink-0" />,
     },
     {
       label: "Edit Data",
