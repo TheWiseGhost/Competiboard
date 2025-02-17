@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
     >
       <html lang="en">
         <head>
-          <link rel="icon" type="image/png" href="CompetiboardLogo.png" />
+          <link rel="icon" type="image/png" href="/CompetiboardLogo.png" />
           <link
             href="https://fonts.googleapis.com/css2?family=Archivo&family=Bebas+Neue&family=Oswald&family=Quicksand&family=Work+Sans&family=Nunito&display=swap"
             rel="stylesheet"

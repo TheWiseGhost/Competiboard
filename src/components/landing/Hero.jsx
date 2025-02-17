@@ -32,7 +32,7 @@ const Hero = () => {
       <nav className="flex items-center justify-between px-6 pt-8">
         <div className="flex items-center gap-2">
           <img
-            src="CompetiboardLogo.png"
+            src="/CompetiboardLogo.png"
             alt="Competiboard Logo"
             className="h-8 w-8"
           />
