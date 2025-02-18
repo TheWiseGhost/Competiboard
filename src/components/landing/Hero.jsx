@@ -110,17 +110,20 @@ const Hero = () => {
 
       {/* Main Content */}
       <main className=" flex flex-col mx-auto mt-16 text-center px-4">
-        <h1 className="text-5xl md:text-7xl font-bold mb-8 font-euclid">
-          <span className="text-6xl md:text-8xl pr-2">🥇</span>
-          <span className="inline-block bg-black text-white pl-3 pr-4 py-2 mr-2">
-            Boost
-          </span>
-          <span>
-            {" "}
-            your <br /> engagement in seconds
-          </span>
-          <span className="text-red-500">.</span>
-        </h1>
+        <div className="flex flex-col justify-center items-center">
+          <div className="text-5xl md:text-7xl flex flex-row items-center font-bold font-euclid">
+            <img src="/Medal.png" className="w-16 md:w-24 h-fit mr-2 md:mr-5" />
+            <h1 className="inline-block bg-black text-white pl-3 pr-4 py-2 mr-2">
+              Boost
+            </h1>
+            <h1 className="ml-1 md:ml-3">your</h1>
+          </div>
+          <div className="text-5xl md:text-7xl flex flex-row items-center font-bold mb-8 font-euclid">
+            <h1>
+              engagement in seconds<span className="text-red-500">.</span>
+            </h1>
+          </div>
+        </div>
 
         <p className="text-sm md:text-xl text-gray-800 text-center w-full md:w-[850px] mb-12 mx-auto font-afc leading-8 px-1 md:px-0">
           Competiboard helps you effortlessly launch your{" "}

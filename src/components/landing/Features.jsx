@@ -6,7 +6,7 @@ const Features = () => {
       <div className="h-1 bg-black w-full mb-24"></div>
       <div className="flex flex-col space-y-4 text-left font-euclid items-center">
         <div className="flex flex-row items-start">
-          <span className="text-5xl md:text-7xl font-semibold transform">
+          <span className="text-4xl md:text-7xl font-semibold transform">
             Plus Tons of
           </span>
         </div>
@@ -27,7 +27,7 @@ const Features = () => {
       <div className="pt-12">
         <img
           src="FeaturesBento.png"
-          className="w-11/12 md:w-2/3 mx-auto h-full"
+          className="w-5/6 md:w-2/3 mx-auto h-full"
         />
       </div>
     </div>
