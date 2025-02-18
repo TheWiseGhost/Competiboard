@@ -20,9 +20,21 @@ const Example = () => {
         </div>
       </div>
 
-      {/* Right side gray section */}
-      <div className="w-[1200px] h-[600px] bg-gray-200">
-        {/* Content for gray section can go here */}
+      {/* Right side gray section with Supademo */}
+      <div className="w-[1200px] h-[600px] bg-white relative">
+        <div className="absolute inset-0">
+          <div className="w-full h-full relative">
+            <iframe
+              src="https://app.supademo.com/embed/cm79ruqgz0nhq11on0cy6tpph?embed_v=2"
+              title="Supademo Demo"
+              allow="clipboard-write"
+              webkitallowfullscreen="true"
+              mozallowfullscreen="true"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
