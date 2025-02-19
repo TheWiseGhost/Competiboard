@@ -148,10 +148,26 @@ const RewardsManager = ({ id }) => {
         }),
       });
       if (!response.ok) throw new Error("Failed to send rewards");
-      alert("Rewards sent successfully!");
+      toast({
+        title: `Rewards Send!`,
+        description: "Your leaderboard leaders thank you",
+        action: (
+          <ToastAction onClick={() => {}} altText="Close">
+            Close
+          </ToastAction>
+        ),
+      });
     } catch (error) {
       console.error("Send error:", error);
-      alert("Failed to send rewards");
+      toast({
+        title: `Failed to send Rewards`,
+        description: "Reload or contact support",
+        action: (
+          <ToastAction onClick={() => {}} altText="Close">
+            Close
+          </ToastAction>
+        ),
+      });
     }
   };
 

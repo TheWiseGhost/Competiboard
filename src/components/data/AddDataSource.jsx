@@ -140,6 +140,16 @@ const AddDataSource = ({ id }) => {
   return (
     <div className="bg-white rounded-lg font-dm pt-12">
       <h2 className="text-3xl font-medium">Add Data Source</h2>
+      <p className="text-sm text-neutral-700 pt-2">
+        Make sure DB network allows access for 76.76.21.21, 3.134.238.10,
+        3.129.111.220, 52.15.118.168
+      </p>
+      <p className="text-sm text-neutral-700">
+        Make sure to provide Publicly Viewable Url for sheet, format like
+        https://docs.google.com/spreadsheets/d/1tJZXaDv0IZ9A0Tam23IoK3nU3G79gn6t8-bEYtvXQt0/{" "}
+        <br />
+        (notice how there is no ?edit params)
+      </p>
       <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       <div className="mt-4 flex flex-row items-center space-x-4">

@@ -189,7 +189,10 @@ const DataSettings = ({ id }) => {
 
   return (
     <div className="bg-white rounded-lg pt-16 font-dm">
-      <h2 className="text-3xl font-medium">Board Data Settings</h2>
+      <h2 className="text-3xl font-medium flex flex-row items-center">
+        Board Data Settings
+        <span className="text-gray-700 text-base pl-3">(Case Sensitive!!)</span>
+      </h2>
       <div className="mt-4 mb-8 bg-light_coral/70 w-96 h-0.5" />
 
       {/* Filter Settings */}
