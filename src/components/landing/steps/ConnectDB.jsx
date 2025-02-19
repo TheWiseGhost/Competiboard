@@ -1,15 +1,17 @@
 const ConnectDB = () => {
   return (
-    <div className="bg-[#FFC7C3] h-screen" id="process">
+    <div className="bg-[#FFC7C3] min-h-screen md:h-screen" id="process">
       <div className="h-1 bg-black w-full mb-10"></div>
-      <div className="flex flex-row gap-12 px-6 md:px-0">
+      <div className="flex flex-col md:flex-row gap-12 px-6 md:px-0">
         {/* Left Side */}
-        <div className="w-1/2 h-full hidden md:flex flex-row items-center justify-center">
-          <div className="w-0 md:w-[480px] h-[420px] mt-12 bg-white border-4 border-black rounded-2xl"></div>
+        <div className="w-full md:w-1/2 md:h-full flex flex-row items-center justify-center">
+          <div className="md:w-[480px] md:h-[420px] md:mt-12 flex items-center justify-center bg-white border-4 border-black rounded-2xl">
+            <img src="/AddData.png" className="w-4/5 md:w-full p-10" />
+          </div>
         </div>
 
         {/* Right Side */}
-        <div className="flex font-dm font-medium text-lg md:text-xl flex-col mt-20 w-full md:w-1/2">
+        <div className="flex font-dm font-medium text-lg md:text-xl flex-col md:mt-20 mb-16 md:mb-0 w-full px-4 md:px-0 md:w-1/2">
           <div className="w-full md:w-[500px] mr-auto">
             <h1 className="text-5xl md:text-7xl font-euclid font-semibold pb-12">
               1. Connect DB
