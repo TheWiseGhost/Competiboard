@@ -21,7 +21,7 @@ const AddDataSource = ({ id }) => {
     const fetchDataDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/data_details/",
+          "https://competiboardbackend.onrender.com/api/data_details/",
           {
             method: "POST",
             headers: {
@@ -92,7 +92,7 @@ const AddDataSource = ({ id }) => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/update_data_source/",
+        "https://competiboardbackend.onrender.com/api/update_data_source/",
         {
           method: "POST",
           headers: {

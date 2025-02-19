@@ -31,7 +31,7 @@ const RewardsManager = ({ id }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user_details/",
+          "https://competiboardbackend.onrender.com/api/user_details/",
           {
             method: "POST",
             headers: {
@@ -59,7 +59,7 @@ const RewardsManager = ({ id }) => {
     const fetchRewardDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/reward_details/",
+          "https://competiboardbackend.onrender.com/api/reward_details/",
           {
             method: "POST",
             headers: {
@@ -87,18 +87,21 @@ const RewardsManager = ({ id }) => {
 
   const handleSave = async () => {
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/update_reward/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          board_id: id,
-          clerk_id: user?.id,
-          email_body: emailContent,
-          email_field: emailField,
-        }),
-      });
+      const response = await fetch(
+        "https://competiboardbackend.onrender.com/api/update_reward/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            board_id: id,
+            clerk_id: user?.id,
+            email_body: emailContent,
+            email_field: emailField,
+          }),
+        }
+      );
       if (!response.ok) throw new Error("Failed to save rewards");
       toast({
         title: `Rewards Updated`,
@@ -134,19 +137,22 @@ const RewardsManager = ({ id }) => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/send_rewards/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          board_id: id,
-          clerk_id: user?.id,
-          time: timeRange,
-          min_rank: minRank,
-          max_rank: maxRank,
-        }),
-      });
+      const response = await fetch(
+        "https://competiboardbackend.onrender.com/api/send_rewards/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            board_id: id,
+            clerk_id: user?.id,
+            time: timeRange,
+            min_rank: minRank,
+            max_rank: maxRank,
+          }),
+        }
+      );
       if (!response.ok) throw new Error("Failed to send rewards");
       toast({
         title: `Rewards Send!`,

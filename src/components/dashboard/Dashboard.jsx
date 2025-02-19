@@ -133,7 +133,8 @@ const DashboardComponent = () => {
       formData.append("title", title);
       formData.append("clerk_id", user.id);
 
-      const uploadUrl = "http://127.0.0.1:8000/api/add_board/";
+      const uploadUrl =
+        "https://competiboardbackend.onrender.com/api/add_board/";
 
       const response = await fetch(uploadUrl, {
         method: "POST",
@@ -199,7 +200,7 @@ const DashboardComponent = () => {
       const fetchBoards = async () => {
         try {
           const response = await fetch(
-            "http://127.0.0.1:8000/api/board_options/",
+            "https://competiboardbackend.onrender.com/api/board_options/",
             {
               method: "POST",
               headers: { "Content-Type": "application/json" }, // Added header for JSON content

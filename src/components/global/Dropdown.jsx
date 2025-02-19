@@ -16,7 +16,7 @@ const Dropdown = ({ page }) => {
         setLoading(true); // Start loading
         try {
           const response = await fetch(
-            "http://127.0.0.1:8000/api/board_options/",
+            "https://competiboardbackend.onrender.com/api/board_options/",
             {
               method: "POST",
               body: JSON.stringify({ clerk_id: user.id }),

@@ -39,7 +39,7 @@ const PublicBoard = ({ board }) => {
     const fetchBoardDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/public_board_details/",
+          "https://competiboardbackend.onrender.com/api/public_board_details/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -65,7 +65,7 @@ const PublicBoard = ({ board }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/public_generate_leaderboard/",
+          "https://competiboardbackend.onrender.com/api/public_generate_leaderboard/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -88,7 +88,7 @@ const PublicBoard = ({ board }) => {
     const fetchLast30DaysLeaderboard = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/public_generate_30_days_leaderboard/",
+          "https://competiboardbackend.onrender.com/api/public_generate_30_days_leaderboard/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

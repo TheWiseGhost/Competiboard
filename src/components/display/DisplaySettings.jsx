@@ -39,7 +39,7 @@ const DisplaySettings = ({ id }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user_details/",
+          "https://competiboardbackend.onrender.com/api/user_details/",
           {
             method: "POST",
             headers: {
@@ -68,7 +68,7 @@ const DisplaySettings = ({ id }) => {
     const fetchBoardDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/board_details/",
+          "https://competiboardbackend.onrender.com/api/board_details/",
           {
             method: "POST",
             headers: {
@@ -110,7 +110,7 @@ const DisplaySettings = ({ id }) => {
 
     try {
       const response = await fetch(
-        "http://127.0.0.1:8000/api/update_display/",
+        "https://competiboardbackend.onrender.com/api/update_display/",
         {
           method: "POST",
           headers: {

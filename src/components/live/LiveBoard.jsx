@@ -42,7 +42,7 @@ const LiveBoard = ({ id }) => {
     const fetchUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user_details/",
+          "https://competiboardbackend.onrender.com/api/user_details/",
           {
             method: "POST",
             headers: {
@@ -70,7 +70,7 @@ const LiveBoard = ({ id }) => {
     const fetchBoardDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/board_details/",
+          "https://competiboardbackend.onrender.com/api/board_details/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -96,7 +96,7 @@ const LiveBoard = ({ id }) => {
       setLoading(true);
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/generate_leaderboard/",
+          "https://competiboardbackend.onrender.com/api/generate_leaderboard/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -120,7 +120,7 @@ const LiveBoard = ({ id }) => {
       if (!user || !id) return;
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/generate_30_days_leaderboard/",
+          "https://competiboardbackend.onrender.com/api/generate_30_days_leaderboard/",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },

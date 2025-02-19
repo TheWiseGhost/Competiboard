@@ -32,7 +32,7 @@ const SettingsComponent = () => {
     const fecthUserDetails = async () => {
       try {
         const response = await fetch(
-          "http://127.0.0.1:8000/api/user_details/",
+          "https://competiboardbackend.onrender.com/api/user_details/",
           {
             method: "POST",
             headers: {
