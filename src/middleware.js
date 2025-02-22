@@ -20,22 +20,21 @@ const isProtectedRoute = createRouteMatcher([
 
 export default clerkMiddleware((auth, request) => {
   const { nextUrl, headers } = request;
-  const host = headers.get("host"); // Get the domain name from the request headers
+  const host = headers.get("host");
 
   if (!isProtectedRoute(request)) {
-    return NextResponse.next(); // Allow access to public routes
+    return NextResponse.next();
   }
 
-  auth().protect(); // Protect specified routes
+  auth().protect();
 
   if (
     host === "localhost:3000" ||
     host === "competiboard.vercel.app" ||
     host === "competiboard.com"
   ) {
-    return NextResponse.next(); // Allow access for your main domain
+    return NextResponse.next();
   } else {
-    // Redirect to your main domain if the request is not for /live/*
     return NextResponse.redirect(
       new URL("https://competiboard.com", request.url)
     );
