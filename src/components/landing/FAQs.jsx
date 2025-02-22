@@ -22,8 +22,8 @@ const FAQs = () => {
           <AccordionItem value="item-1">
             <AccordionTrigger>What features do I get on Pro</AccordionTrigger>
             <AccordionContent>
-              You can get give your board access to filtering, fonts, different
-              data indexing methods, and mobile leaderboards. Plus you will get
+              You can give your board access to filtering, fonts, different data
+              indexing methods, and mobile leaderboards. Plus you will get
               access to many more smaller features and updates that we
               constantly release. You can request new features too!
             </AccordionContent>
@@ -55,7 +55,7 @@ const FAQs = () => {
           <AccordionItem value="item-5">
             <AccordionTrigger>How do I contact you?</AccordionTrigger>
             <AccordionContent>
-              Contact us at founder's email: byjuaditya@gmail.com
+              Contact us at our founder's email: byjuaditya@gmail.com
             </AccordionContent>
           </AccordionItem>
         </Accordion>
