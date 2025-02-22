@@ -8,33 +8,25 @@ export const config = {
   ],
 };
 
-const isPublicRoute = createRouteMatcher([
-  "/sign-in(.*)",
-  "/sign-up(.*)",
-  "/",
-  "/api(.*)",
+const isProtectedRoute = createRouteMatcher([
+  "/dashboard(.*)",
+  "/data(.*)",
+  "/display(.*)",
   "/live(.*)",
-  "/sitemap.txt",
-  "/terms",
-  "/privacy",
+  "/board(.*)",
+  "/checkout(.*)",
+  "/settings(.*)",
 ]);
 
 export default clerkMiddleware((auth, request) => {
   const { nextUrl, headers } = request;
   const host = headers.get("host"); // Get the domain name from the request headers
 
-  if (
-    nextUrl.pathname.startsWith("/live/") ||
-    nextUrl.pathname.startsWith("/api/")
-  ) {
-    return NextResponse.next();
+  if (!isProtectedRoute(request)) {
+    return NextResponse.next(); // Allow access to public routes
   }
 
-  if (!isPublicRoute(request)) {
-    // Add await here
-    auth().protect();
-    return NextResponse.next();
-  }
+  auth().protect(); // Protect specified routes
 
   if (
     host === "localhost:3000" ||
