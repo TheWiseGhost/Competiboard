@@ -28,11 +28,7 @@ export default clerkMiddleware((auth, request) => {
 
   auth().protect();
 
-  if (
-    host === "localhost:3000" ||
-    host === "competiboard.vercel.app" ||
-    host === "competiboard.com"
-  ) {
+  if (host === "competiboard.vercel.app" || host === "competiboard.com") {
     return NextResponse.next();
   } else {
     return NextResponse.redirect(

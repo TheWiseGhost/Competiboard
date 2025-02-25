@@ -71,7 +71,7 @@ const GridItem = ({ title, thumbnail }) => {
     >
       <div
         onClick={() => {
-          window.open(`http://localhost:3000/${title}`);
+          window.open(`https://competiboard.com/${title}`);
         }}
         className="rounded-lg overflow-hidden flex flex-col justify-center items-center h-64 w-fit mx-auto"
       >
